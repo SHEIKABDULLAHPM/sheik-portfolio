@@ -1,0 +1,1 @@
+Place Sheik Abdullah's hero photograph in this folder as `sheik-abdullah.jpg` (or update the import path accordingly).
