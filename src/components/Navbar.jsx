@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const links = [
+  { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
   { label: 'Education', href: '#education' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Certificates', href: '#certifications' },
+  { label: 'Internship', href: '#internships' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
@@ -21,7 +23,8 @@ const clampSectionScroll = (selector) => {
   const element = document.querySelector(selector);
   if (!element) return;
 
-  const offset = 80;
+  const header = document.querySelector('header');
+  const offset = header instanceof HTMLElement ? header.getBoundingClientRect().height + 12 : 80;
   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
   const targetPosition = Math.max(elementPosition - offset, 0);
 
@@ -80,13 +83,23 @@ const Navbar = () => {
               key={link.href}
               type="button"
               onClick={() => handleLinkClick(link.href)}
-              className="group relative overflow-hidden rounded-full px-3 py-2 transition-all duration-300 hover:text-white"
+              className="group relative overflow-hidden rounded-full px-3 py-2 hover:text-white will-change-transform"
+              style={{ transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
             >
-              <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5">
+              <span 
+                className="relative z-10 group-hover:-translate-y-0.5"
+                style={{ transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)', display: 'inline-block' }}
+              >
                 {link.label}
               </span>
-              <span className="pointer-events-none absolute inset-0 -z-10 bg-indigo-500/0 transition-colors duration-300 group-hover:bg-indigo-500/10" />
-              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 transition-transform duration-300 group-hover:scale-x-100" />
+              <span 
+                className="pointer-events-none absolute inset-0 -z-10 bg-indigo-500/0 group-hover:bg-indigo-500/10"
+                style={{ transition: 'background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+              />
+              <span 
+                className="pointer-events-none absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 group-hover:scale-x-100"
+                style={{ transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+              />
             </button>
           ))}
         </div>
@@ -116,12 +129,19 @@ const Navbar = () => {
                 key={link.href}
                 type="button"
                 onClick={() => handleLinkClick(link.href)}
-                className="group relative overflow-hidden rounded-2xl px-4 py-3 text-left transition-all duration-300 hover:bg-indigo-500/10"
+                className="group relative overflow-hidden rounded-2xl px-4 py-3 text-left transition-colors duration-500 hover:bg-indigo-500/10"
+                style={{ transition: 'background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
               >
-                <span className="relative z-10 text-slate-100 transition-transform duration-300 group-hover:translate-x-1">
+                <span 
+                  className="relative z-10 text-slate-100 group-hover:translate-x-1"
+                  style={{ transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)', display: 'inline-block' }}
+                >
                   {link.label}
                 </span>
-                <span className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-indigo-400/0 via-indigo-400/60 to-purple-400/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span 
+                  className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-indigo-400/0 via-indigo-400/60 to-purple-400/0 opacity-0 group-hover:opacity-100"
+                  style={{ transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                />
               </button>
             ))}
           </motion.div>

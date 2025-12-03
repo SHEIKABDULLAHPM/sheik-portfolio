@@ -1,0 +1,19 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sphere" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="40%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </radialGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="60%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)" rx="48" />
+  <circle cx="400" cy="300" r="150" fill="url(#sphere)" opacity="0.9" />
+  <path d="M220 340c60 80 300 80 360 0" fill="none" stroke="#fde68a" stroke-width="6" stroke-linecap="round" />
+  <path d="M280 220l120 70-120 70" fill="none" stroke="#fcd34d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+  <path d="M520 220l-120 70 120 70" fill="none" stroke="#fcd34d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+</svg>

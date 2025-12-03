@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import heroPortrait from '../assets/sheik-abdullah.jpg';
 
 const heroVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -25,34 +26,42 @@ const particles = [
 ];
 
 const Hero = () => {
+  const reduceMotion = useReducedMotion();
+
+  const heroTransition = reduceMotion ? { duration: 0 } : { duration: 0.7, ease: 'easeOut' };
+  const imageTransition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 0.6, ease: 'easeOut', delay: 0.2 };
+
   return (
     <section
       id="hero"
-      className="relative mx-auto flex max-w-6xl flex-col items-center gap-16 px-6 pt-32 text-center sm:pt-36 lg:flex-row lg:items-center lg:justify-between lg:text-left"
+      className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 pt-24 text-center sm:px-6 sm:pt-28 lg:flex-row lg:items-center lg:justify-between lg:pt-24 lg:text-left"
     >
       <motion.div
         className="max-w-xl space-y-6"
-        initial="hidden"
+        initial={reduceMotion ? 'visible' : 'hidden'}
         animate="visible"
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        transition={heroTransition}
         variants={heroVariants}
       >
         <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-indigo-200">
           Aspiring Software Developer
         </span>
-        <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-          Sheik Abdullah
+        <h1 className="font-bold leading-tight text-white text-[clamp(2rem,5vw,3.5rem)]">
+          Peer Sheik Abdullah Mohd Noordeen
         </h1>
-        <p className="text-lg font-medium text-indigo-200 sm:text-xl">
+        <p className="font-medium text-indigo-200 leading-snug text-[clamp(1rem,2.4vw,1.25rem)]">
           3rd Year CSBS Engineering Student
         </p>
-        <p className="text-base leading-relaxed text-slate-300 sm:text-lg">
-          I build modern web experiences that combine clean design, smooth interactions, and practical problem solving. I enjoy exploring emerging tools while keeping performance and accessibility front of mind.
+        <p className="leading-relaxed text-slate-300 text-[clamp(0.95rem,1.9vw,1.125rem)]">
+          I craft modern web experiences that blend clean design with purposeful problem-solving. I'm quick to embrace new tools, building responsive, accessible, and genuinely people-friendly interfaces with thoughtful engineering and an ever-curious mindset.
         </p>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+        <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
           <a
             href="/resume.pdf"
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-indigo-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-400"
+            className="group relative inline-flex transform-gpu items-center justify-center overflow-hidden rounded-full bg-indigo-500 px-10 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all duration-500 will-change-transform hover:-translate-y-1 hover:bg-indigo-400 sm:px-9 sm:py-3.5 sm:text-sm lg:text-base"
+            style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
           >
             <span className="relative z-10">Resume</span>
             <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-400 opacity-0 transition-opacity duration-300 group-hover:opacity-40" />
@@ -60,7 +69,8 @@ const Hero = () => {
           </a>
           <a
             href="#contact"
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-indigo-500/50 bg-transparent px-8 py-3 text-sm font-semibold text-indigo-200 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-white"
+            className="group relative inline-flex transform-gpu items-center justify-center overflow-hidden rounded-full border border-indigo-500/50 bg-transparent px-10 py-4 text-base font-semibold text-indigo-200 transition-all duration-500 will-change-transform hover:-translate-y-1 hover:border-indigo-400 hover:text-white sm:px-9 sm:py-3.5 sm:text-sm lg:text-base"
+            style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
           >
             <span className="relative z-10">Contact</span>
             <span className="pointer-events-none absolute inset-0 -z-10 bg-indigo-500/0 transition-colors duration-300 group-hover:bg-indigo-500/10" />
@@ -71,9 +81,9 @@ const Hero = () => {
 
       <motion.div
         className="relative flex w-full max-w-md flex-col items-center gap-8"
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+        transition={imageTransition}
       >
         <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
           {bubbles.map((bubble) => (
@@ -86,9 +96,22 @@ const Hero = () => {
                 width: bubble.size,
                 height: bubble.size,
               }}
-              initial={{ opacity: 0.15, y: 0 }}
-              animate={{ opacity: [0.15, 0.3, 0.15], y: [0, -14, 0] }}
-              transition={{ duration: 7, repeat: Infinity, delay: bubble.delay, ease: 'easeInOut' }}
+              initial={{ opacity: 0.18, y: 0 }}
+              animate={
+                reduceMotion
+                  ? { opacity: 0.22 }
+                  : { opacity: [0.18, 0.32, 0.18], y: [0, -14, 0] }
+              }
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: 7,
+                      repeat: Infinity,
+                      delay: bubble.delay,
+                      ease: 'easeInOut',
+                    }
+              }
             />
           ))}
           {particles.map((particle) => (
@@ -101,16 +124,26 @@ const Hero = () => {
                 width: particle.size,
                 height: particle.size,
               }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0.7, 0], y: [0, -18, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, delay: particle.delay, ease: 'easeInOut' }}
+              initial={{ opacity: 0.12 }}
+              animate={reduceMotion ? { opacity: 0.18 } : { opacity: [0, 0.7, 0], y: [0, -18, 0] }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: 4.5,
+                      repeat: Infinity,
+                      delay: particle.delay,
+                      ease: 'easeInOut',
+                    }
+              }
             />
           ))}
         </div>
-        <div className="relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-full border border-indigo-500/40 bg-slate-900/70 shadow-xl shadow-indigo-500/20 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+        <div className="relative flex h-72 w-72 items-center justify-center overflow-hidden rounded-full border border-indigo-500/40 bg-slate-900/70 shadow-xl shadow-indigo-500/20 sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]">
           <img
-            src="/images/sheik-abdullah.jpg"
+            src={heroPortrait}
             alt="Portrait of Sheik Abdullah"
+            draggable={false}
             className="h-full w-full object-cover"
             loading="eager"
           />

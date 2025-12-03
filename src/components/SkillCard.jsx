@@ -1,22 +1,233 @@
-import { motion } from 'framer-motion';
+import { useCallback } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Pin } from 'lucide-react';
 
-const SkillCard = ({ title, icon: Icon }) => (
-  <motion.div
-    className="group relative overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/70 p-6 shadow-lg shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/25"
-    whileHover={{ scale: 1.025 }}
-    whileTap={{ scale: 0.99 }}
-  >
-    <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-    <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300 transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-indigo-500/30 group-hover:text-white">
-      {Icon ? <Icon size={22} /> : null}
-    </div>
-    <p className="relative mt-4 text-base font-semibold text-white transition-colors duration-300 group-hover:text-indigo-100">
-      {title}
-    </p>
-    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-      <div className="absolute -top-24 right-0 h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl" />
-    </div>
-  </motion.div>
-);
+/**
+ * @typedef {{ name: string; proficiency: number }} SkillItem
+ */
+
+/**
+ * @param {{
+ *   title: string;
+ *   icon?: import('react').ComponentType<any>;
+ *   items?: SkillItem[];
+ *   expanded?: boolean;
+ *   onHoverChange?: (isHovering: boolean) => void;
+ *   isPinned?: boolean;
+ *   onPinToggle?: () => void;
+ * }} props
+ */
+const SkillCard = ({
+  title,
+  icon: Icon,
+  items,
+  expanded = false,
+  onHoverChange,
+  isPinned = false,
+  onPinToggle,
+}) => {
+  const skillItems = items ?? [];
+  const hasDetails = skillItems.length > 0;
+  const isExpanded = isPinned || expanded;
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (!hasDetails) {
+        return;
+      }
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        if (onPinToggle) {
+          onPinToggle();
+        } else if (onHoverChange) {
+          onHoverChange(!isExpanded);
+        }
+      }
+    },
+    [hasDetails, isExpanded, onHoverChange, onPinToggle]
+  );
+
+  const isHoverable = hasDetails;
+  const helperText = isPinned
+    ? 'Pinned · click to unpin'
+    : isExpanded
+      ? 'Hover away to hide proficiency'
+      : 'Click to pin or hover to preview';
+
+  const handleActivate = useCallback(
+    (event) => {
+      if (!hasDetails) {
+        return;
+      }
+      if (event) {
+        event.preventDefault();
+      }
+      if (onPinToggle) {
+        onPinToggle();
+        return;
+      }
+      if (onHoverChange) {
+        onHoverChange(!isExpanded);
+      }
+    },
+    [hasDetails, isExpanded, onHoverChange, onPinToggle]
+  );
+
+  const handlePinToggle = useCallback(
+    (event) => {
+      if (!hasDetails || !onPinToggle) {
+        return;
+      }
+      event.stopPropagation();
+      event.preventDefault();
+      onPinToggle();
+    },
+    [hasDetails, onPinToggle]
+  );
+
+  const handleMouseEnter = useCallback(() => {
+    if (!hasDetails || !onHoverChange) {
+      return;
+    }
+    onHoverChange(true);
+  }, [hasDetails, onHoverChange]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!hasDetails || !onHoverChange) {
+      return;
+    }
+    onHoverChange(false);
+  }, [hasDetails, onHoverChange]);
+
+  return (
+    <motion.div
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform sm:p-6 ${
+        hasDetails ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50' : ''
+      }`}
+      style={{ transition: 'border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0, borderColor: isExpanded ? 'rgba(99, 102, 241, 0.4)' : 'rgba(71, 85, 105, 0.7)' }}
+      whileHover={isHoverable ? { scale: 1.01, y: -4 } : {}}
+      whileTap={isHoverable ? { scale: 0.985 } : {}}
+      transition={{ type: 'spring', stiffness: 260, damping: 34, mass: 0.6 }}
+      onClick={handleActivate}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
+      role={hasDetails ? 'button' : undefined}
+      tabIndex={hasDetails ? 0 : undefined}
+      aria-expanded={hasDetails ? isExpanded : undefined}
+    >
+      <div
+        className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 ${
+          isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+        }`}
+        style={{ transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
+      />
+      <div className="relative flex items-center justify-between gap-3">
+        <motion.div
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl will-change-transform ${
+            isExpanded
+              ? 'bg-indigo-500/30 text-white'
+              : 'bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 group-hover:text-white'
+          }`}
+          style={{ transition: 'background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+          whileHover={{ rotate: isExpanded ? 0 : 3, scale: 1.05 }}
+          transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+        >
+          {Icon ? <Icon size={22} /> : null}
+        </motion.div>
+        <p
+          className={`flex-1 text-base font-semibold ${
+            isExpanded ? 'text-indigo-100' : 'text-white group-hover:text-indigo-100'
+          }`}
+          style={{ transition: 'color 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+        >
+          {title}
+        </p>
+        {hasDetails ? (
+          <button
+            type="button"
+            className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-slate-700/40 bg-slate-900/40 text-indigo-200 transition-colors duration-300 hover:border-indigo-400/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-400/40 ${
+              isPinned ? 'border-indigo-400/60 bg-indigo-500/20 text-indigo-100' : ''
+            }`}
+            aria-label={isPinned ? 'Unpin skill card' : 'Pin skill card'}
+            aria-pressed={isPinned}
+            onClick={handlePinToggle}
+          >
+            <Pin size={16} className={`transition-transform duration-300 ${isPinned ? 'rotate-45 fill-current' : ''}`} />
+          </button>
+        ) : null}
+      </div>
+      {hasDetails ? (
+        <>
+          <motion.p
+            className={`relative mt-2 text-[11px] font-semibold uppercase tracking-wide ${
+              isExpanded ? 'text-indigo-200/80' : 'text-indigo-200/70'
+            }`}
+            style={{ transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.04, duration: 0.28 }}
+          >
+            {helperText}
+          </motion.p>
+          <AnimatePresence initial={false}>
+            {isExpanded ? (
+              <motion.ul
+                key="skill-details"
+                className="relative mt-3 flex flex-col gap-2.5 text-sm text-slate-300"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.28, ease: [0.48, 0.04, 0.32, 0.9] }}
+              >
+                {skillItems.map((item) => {
+                  const pct = Math.max(0, Math.min(100, Number(item.proficiency ?? 0)));
+                  return (
+                    <motion.li
+                      key={item.name}
+                      className="space-y-2"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      transition={{ duration: 0.2, ease: [0.48, 0.04, 0.32, 0.9] }}
+                    >
+                      <div className="flex items-center justify-start gap-3">
+                        <span className="font-medium text-white">{item.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800/80">
+                          <motion.div
+                            className="h-2 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-500 shadow-sm shadow-indigo-500/50 will-change-transform"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pct}%` }}
+                            exit={{ width: 0 }}
+                            transition={{ duration: 0.4, ease: [0.48, 0.04, 0.32, 0.9] }}
+                          />
+                        </div>
+                        <span className="w-10 shrink-0 text-right text-xs font-semibold text-indigo-200/80">{pct}%</span>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            ) : null}
+          </AnimatePresence>
+        </>
+      ) : null}
+      <div
+        className={`pointer-events-none absolute inset-0 ${
+          isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+        }`}
+        style={{ transition: 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)' }}
+      >
+        <div className="absolute -top-24 right-0 h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl will-change-transform" />
+      </div>
+    </motion.div>
+  );
+};
 
 export default SkillCard;

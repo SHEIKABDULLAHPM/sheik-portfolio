@@ -3,33 +3,33 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 const socials = [
   {
     label: 'Email',
-    href: 'mailto:sheikabdullah@example.com',
+    href: 'mailto:sheikabdullahpeer@gmail.com',
     icon: Mail,
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com',
+    href: 'https://www.linkedin.com/in/peer-sheik-abdullah-mohd-noordeen-b97148276/',
     icon: Linkedin,
   },
   {
     label: 'GitHub',
-    href: 'https://github.com',
+    href: 'https://github.com/SHEIKABDULLAHPM',
     icon: Github,
   },
 ];
 
 const Footer = () => (
-  <footer className="border-t border-slate-800/80 bg-slate-950/80 py-8">
-    <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 text-sm text-slate-400 sm:flex-row">
-      <p className="text-center sm:text-left">&copy; {new Date().getFullYear()} Sheik Abdullah. All rights reserved.</p>
+  <footer className="border-t border-slate-800/80 bg-slate-950/90 py-5 sm:py-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-3 text-sm text-slate-300 sm:flex-row">
+      <p className="text-center text-slate-400 sm:text-left">&copy; {new Date().getFullYear()} Sheik Abdullah. All rights reserved.</p>
       <div className="flex items-center gap-4">
         {socials.map(({ label, href, icon: Icon }) => (
           <a
             key={label}
             href={href}
-            target={href.startsWith('http') ? '_blank' : undefined}
-            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-200 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-slate-900/60 text-indigo-200 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             aria-label={label}
           >
             <Icon size={18} className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
