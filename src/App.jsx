@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useState } from 'react';
+import { Suspense, lazy, useCallback, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Navbar,
@@ -183,6 +183,8 @@ const projects = [
   },
 ];
 
+const projectFilters = ['All', ...new Set(projects.flatMap((project) => project.tech))];
+
 const education = [
   {
     institution: 'Bannari Amman Institute of Technology',
@@ -238,9 +240,19 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const sectionBaseClass = 'mx-auto w-full max-w-6xl px-5 sm:px-6 scroll-mt-28';
+
 function App() {
   const [activeSkill, setActiveSkill] = useState(null);
   const [pinnedSkills, setPinnedSkills] = useState([]);
+  const [projectFilter, setProjectFilter] = useState('All');
+
+  const filteredProjects = useMemo(() => {
+    if (projectFilter === 'All') {
+      return projects;
+    }
+    return projects.filter((project) => project.tech.includes(projectFilter));
+  }, [projectFilter]);
 
   const handleSkillHover = useCallback((title, isHovering) => {
     setActiveSkill((current) => {
@@ -283,7 +295,7 @@ function App() {
 
         <motion.section
           id="about"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -311,7 +323,7 @@ function App() {
 
         <motion.section
           id="education"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -344,7 +356,7 @@ function App() {
 
         <motion.section 
           id="skills" 
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -352,30 +364,32 @@ function App() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <SectionTitle title="Skills" eyebrow="Toolkit" />
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
-            {skills.map((skill) => {
-              const isPinned = pinnedSkills.includes(skill.title);
-              const isExpanded = activeSkill === skill.title || isPinned;
+          <div className="sticky top-24 z-30 w-full max-h-[calc(100vh-8rem)] overflow-y-auto rounded-3xl border border-slate-800/60 bg-slate-950/90 p-4 shadow-xl shadow-indigo-500/10 sm:static sm:max-h-none sm:overflow-visible sm:border-none sm:bg-transparent sm:p-0 sm:shadow-none">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
+              {skills.map((skill) => {
+                const isPinned = pinnedSkills.includes(skill.title);
+                const isExpanded = activeSkill === skill.title || isPinned;
 
-              return (
-                <SkillCard
-                  key={skill.title}
-                  title={skill.title}
-                  icon={skill.icon}
-                  items={skill.items}
-                  expanded={isExpanded}
-                  isPinned={isPinned}
-                  onHoverChange={(isHovering) => handleSkillHover(skill.title, isHovering)}
-                  onPinToggle={() => handlePinToggle(skill.title)}
-                />
-              );
-            })}
+                return (
+                  <SkillCard
+                    key={skill.title}
+                    title={skill.title}
+                    icon={skill.icon}
+                    items={skill.items}
+                    expanded={isExpanded}
+                    isPinned={isPinned}
+                    onHoverChange={(isHovering) => handleSkillHover(skill.title, isHovering)}
+                    onPinToggle={() => handlePinToggle(skill.title)}
+                  />
+                );
+              })}
+            </div>
           </div>
         </motion.section>
 
         <motion.section
           id="certifications"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -388,7 +402,7 @@ function App() {
 
         <motion.section
           id="internships"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -427,7 +441,7 @@ function App() {
 
         <motion.section
           id="experience"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -443,7 +457,7 @@ function App() {
 
         <motion.section 
           id="projects" 
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -451,16 +465,40 @@ function App() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <SectionTitle title="Projects" eyebrow="Highlights" />
-          <div className="grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectCard key={project.title} {...project} />
-            ))}
+          <div className="mt-4 flex w-full flex-wrap items-center gap-2 overflow-x-auto rounded-2xl border border-slate-800/80 bg-slate-900/70 p-3 text-sm sm:gap-3 sm:p-4">
+            {projectFilters.map((filter) => {
+              const isActive = projectFilter === filter;
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setProjectFilter(filter)}
+                  className={`flex items-center gap-2 rounded-full border px-4 py-1.5 font-medium transition-all duration-300 ${
+                    isActive
+                      ? 'border-indigo-400/60 bg-indigo-500/20 text-white shadow shadow-indigo-500/20'
+                      : 'border-slate-700/60 bg-slate-900/80 text-slate-300 hover:border-indigo-400/50 hover:text-white'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-5 grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => <ProjectCard key={project.title} {...project} />)
+            ) : (
+              <div className="col-span-full rounded-3xl border border-indigo-500/30 bg-slate-950/70 p-6 text-center text-sm text-slate-300">
+                No projects match the selected filter yet.
+              </div>
+            )}
           </div>
         </motion.section>
 
         <motion.section
           id="contact"
-          className="mx-auto w-full max-w-6xl px-5 sm:px-6"
+          className={sectionBaseClass}
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.6, ease: 'easeOut' }}

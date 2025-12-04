@@ -20,7 +20,7 @@ const socials = [
 
 const Footer = () => (
   <footer className="border-t border-slate-800/80 bg-slate-950/90 py-5 sm:py-6">
-    <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-3 text-sm text-slate-300 sm:flex-row">
+    <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 text-sm text-slate-300 sm:flex-row sm:px-6">
       <p className="text-center text-slate-400 sm:text-left">&copy; {new Date().getFullYear()} Sheik Abdullah. All rights reserved.</p>
       <div className="flex items-center gap-4">
         {socials.map(({ label, href, icon: Icon }) => (

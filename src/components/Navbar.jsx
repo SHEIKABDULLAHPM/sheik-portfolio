@@ -69,7 +69,7 @@ const Navbar = () => {
 
   return (
     <header className={headerClasses}>
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6">
         <a
           href="#hero"
           className="text-2xl font-semibold tracking-tight text-white transition-colors duration-200 hover:text-indigo-300 sm:text-3xl"

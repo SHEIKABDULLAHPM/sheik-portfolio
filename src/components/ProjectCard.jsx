@@ -14,7 +14,7 @@ const ProjectCard = ({ title, description, tech, image = undefined }) => (
       {image ? (
         <img
           src={image}
-          alt={title}
+          alt={`${title} preview`}
           draggable={false}
           className="h-full w-full object-cover will-change-transform transition-transform duration-700 group-hover:scale-[1.08] group-hover:brightness-110"
           style={{ transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s cubic-bezier(0.22, 1, 0.36, 1)' }}

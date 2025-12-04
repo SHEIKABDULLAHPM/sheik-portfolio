@@ -101,7 +101,7 @@ const SkillCard = ({
 
   return (
     <motion.div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform sm:p-6 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform group-hover:border-indigo-400/60 group-hover:bg-slate-900/95 group-hover:shadow-indigo-500/25 sm:p-6 ${
         hasDetails ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50' : ''
       }`}
       style={{ transition: 'border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
