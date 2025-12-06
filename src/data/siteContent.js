@@ -4,22 +4,76 @@ import flutterCertificateImage from '../assets/FLUTTER.png';
 import oracleCertificateImage from '../assets/ORACLE AI.png';
 import powerBiCertificateImage from '../assets/POWER BI.png';
 import reactCertificateImage from '../assets/REACT.png';
-
+import smartHostelImage from '../assets/hostel.jpg';
+import mindpeaceImage from '../assets/mindpeace.png';
+import railwayDashboardImage from '../assets/railway.png';
+import careerPathImage from '../assets/careerpath ai.png';
+import textToImageImage from '../assets/text to image.png';
+import hacksporaCertificateImage from '../assets/gallery/hackspora.png';
+import viksitBharatCertificateImage from '../assets/gallery/gov certificate.jpeg';
+import vasandAndCoImage from '../assets/gallery/vasand and co.jpeg';
+import bestShopImage from '../assets/gallery/best shop.jpeg';
+import retailInterviewImage from '../assets/gallery/trends.jpeg';
+import classroomPitchImage from '../assets/gallery/teach.jpeg';
+import weldingLabImage from '../assets/gallery/welding.jpeg';
+import skacasTeamWorkImage from '../assets/gallery/skacas.jpeg';
+import hacksporaEventImage from '../assets/gallery/hackspora event.jpeg';
+import bytsImage from '../assets/gallery/byts.jpeg';
+import crayondImage from '../assets/gallery/crayond.jpeg';
+import speciallabImage from '../assets/gallery/special lab.jpeg';
 export const profile = {
 	name: 'Peer Sheik Abdullah Mohd Noordeen',
-	role: 'Full-stack Developer · CSBS Undergraduate',
-	summary:
-		'I build thoughtful digital experiences that combine clean interfaces, measurable impact, and well-tested engineering practices.',
-	location: 'Chennai, India',
 	image: profileImage,
-	highlights: ['Design systems', 'API integrations', 'AI-assisted prototyping'],
-	availability: 'Available for internships from Jan 2025',
-	socials: [
-		{ label: 'GitHub', url: 'https://github.com/SHEIKABDULLAHPM', type: 'github' },
-		{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/peer-sheik-abdullah-mohd-noordeen-b97148276/', type: 'linkedin' },
-		{ label: 'Twitter', url: 'https://x.com/SheikAbdul42993', type: 'twitter' },
-		{ label: 'Email', url: 'mailto:sheikabdullahpeer@gmail.com', type: 'mail' },
+	title: 'CSBS Student · Aspiring Full-stack Engineer',
+	location: 'Pallapatti, Tamil Nadu',
+};
+export const aboutMe = {
+	introduction: [
+		"I'm a passionate Computer Science and Business Systems student with a strong interest in web development, artificial intelligence, and machine learning. I enjoy building modern, responsive, and user-friendly web applications using HTML, CSS, JavaScript, React, and Next.js while actively expanding my backend skills with Node.js and Express.js.",
+		'Alongside web development, I continue exploring C, Python, and Java as I grow my expertise in data science, machine learning, Power BI, data analysis, and Oracle Java concepts. I love solving problems, writing clean and efficient code, and learning how intelligent systems work.',
+		'Curious, motivated, and quick to learn, I enjoy experimenting with new ideas, working on real-world projects, and constantly improving my technical skills. My goal is to contribute to a forward-thinking tech environment while growing as a developer and innovator.',
 	],
+	educationTimeline: [
+		{
+			id: 'edu-bannari',
+			institution: 'Bannari Amman Institute of Technology, Sathyamangalam',
+			qualification: 'B.Tech in Computer Science and Business Systems',
+			duration: '2023 – 2027',
+			grade: 'Current CGPA: 7.65',
+		},
+		{
+			id: 'edu-arumugam',
+			institution: 'Arumugam Academy Matric Hr. Sec. School, Aravakuruchi',
+			qualification: 'Higher Secondary Education (CS–Maths Stream)',
+			duration: 'Completed: 2023',
+			grade: 'Percentage: 86%',
+		},
+		{
+			id: 'edu-mgm',
+			institution: "M.G.M Academy's High School, Virar (East)",
+			qualification: 'Secondary Education (10th Grade)',
+			duration: 'Completed: 2020',
+			grade: 'Percentage: 65%',
+		},
+	],
+	educationHighlights: [],
+	extras: {
+		interests: [
+			'Building modern and user-friendly web applications',
+			'Learning Java and growing my backend development skills',
+			'Exploring AI/ML and creating smart prototypes',
+			'Improving problem-solving abilities and learning new technologies',
+			'Practicing Data Structures and Algorithms (DSA)',
+			'Playing badminton and chess'
+		],
+		goals: [
+			'Work with a tech team where I can grow in web development, Java backend, and AI-based projects',
+			'Become a strong full-stack engineer with a balance of frontend, backend, and automation skills',
+			'Build useful AI-powered applications while sharpening my DSA knowledge',
+			'Contribute to open-source and community tech projects',
+			'Keep improving my UI/UX skills and create clean, meaningful digital experiences'
+		],
+	},
 };
 
 export const projects = [
@@ -30,7 +84,7 @@ export const projects = [
 			'A modern web-based system designed to simplify hostel and mess operations. It automates room allocation, attendance, mess scheduling, payments, and feedback tracking, helping administrators and residents manage everything seamlessly in one place.',
 		filters: ['Full-Stack Web Apps'],
 		tech: ['Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
-		image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
+		image: smartHostelImage,
 		github: 'https://github.com/SHEIKABDULLAHPM/smart-hostel-and-mess-management',
 		live: 'https://smart-hostel-and-mess-management.vercel.app/',
 	},
@@ -41,7 +95,7 @@ export const projects = [
 			'An AI-powered wellness platform that helps users track emotions, get personalized insights, and access guided exercises. MindPeace focuses on privacy, security, and multilingual support to make mental health assistance accessible to everyone.',
 		filters: ['AI / Machine Learning'],
 		tech: ['Next.js', 'Supabase', 'TensorFlow.js', 'Tailwind CSS'],
-		image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+		image: mindpeaceImage,
 		github: 'https://github.com/SHEIKABDULLAHPM/mental-health-support',
 		live: 'https://mental-health-support-t9cg.vercel.app/',
 	},
@@ -52,7 +106,7 @@ export const projects = [
 			'A personalized AI-driven career guidance platform that analyzes user skills, interests, and goals to recommend learning paths, certifications, and job opportunities. Built to help students and professionals transition into AI with clarity and confidence.',
 		filters: ['AI / Machine Learning'],
 		tech: ['React', 'FastAPI', 'OpenAI API', 'PostgreSQL'],
-		image: 'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?auto=format&fit=crop&w=900&q=80',
+		image: careerPathImage,
 		github: 'https://github.com/SHEIKABDULLAHPM/ai-careerpath',
 		live: 'https://ai-careerpath.vercel.app',
 	},
@@ -63,7 +117,7 @@ export const projects = [
 			'A deep-learning–based system that converts text prompts into high-quality images. Ideal for creators, educators, and researchers, this project demonstrates expertise in generative AI, computer vision, and natural language processing.',
 		filters: ['Generative AI', 'AI / Machine Learning'],
 		tech: ['Python', 'Diffusers', 'FastAPI', 'Docker'],
-		image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
+		image: textToImageImage,
 		github: 'https://github.com/SHEIKABDULLAHPM/text-to-image-gen-ai',
 		live: 'https://text-to-image-gen-ai-e2pq.vercel.app/',
 	},
@@ -74,7 +128,7 @@ export const projects = [
 			'A production-ready decision-support dashboard built with Next.js and TypeScript. Provides real-time railway monitoring, predictive analytics, scenario simulations, and intelligent recommendations to improve operational efficiency and safety.',
 		filters: ['Dashboards / Data Visualization', 'AI / Machine Learning'],
 		tech: ['Next.js', 'TypeScript', 'Supabase', 'D3.js'],
-		image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+		image: railwayDashboardImage,
 		github: 'https://github.com/SHEIKABDULLAHPM/AI-powered-Railway-Decision-Support-Dashboard',
 		live: 'https://railway-ai-dashboard.vercel.app',
 	},
@@ -86,83 +140,80 @@ export const gallery = [
 		description: 'Weekends, hobbies, and the small moments that keep me balanced.',
 		items: [
 			{
-				id: 'personal-1',
-				caption: 'Morning ride along ECR',
-				src: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80',
+				id: 'personal-mentor-sync',
+				caption: 'Mentor sync after day one of the internship.',
+				src: vasandAndCoImage,
+				description: 'Quick debrief with my mentor at Vasand & Co., Sathyamangalam · 4 Jul 2025 (GPS tagged).',
 			},
 			{
-				id: 'personal-2',
-				caption: 'Sketching UI concepts offline',
-				src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
+				id: 'personal-field-research',
+				caption: 'Interviewing retail teams across Kongu Nagar.',
+				src: retailInterviewImage,
+				description: 'Customer research at Trends electronics hub, Athani Road · capturing workflows straight from the floor.',
 			},
 			{
-				id: 'personal-3',
-				caption: 'Capturing city lights after rain',
-				src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80',
+				id: 'personal-best-shop',
+				caption: 'Store owner discussions captured at Best Shop.',
+				src: bestShopImage,
+				description: 'Retail ethnography session at Best Shop, Sathyamangalam · 4 Jul 2025, 8:54 PM IST.',
+			},
+			{
+				id: 'personal-campus-talk',
+				caption: 'Sharing UX + security learnings back on campus.',
+				src: classroomPitchImage,
+				description: 'BIT Sathy classroom demo on UX + security heuristics · Apr 17, 2024.',
+			},
+			{
+				id: 'personal-lab-build',
+				caption: 'Welding practice during fabrication coursework.',
+				src: weldingLabImage,
+				description: 'Hands-on fabrication lab — MIG welding frames for a robotics prototype.',
 			},
 		],
 	},
 	{
-		category: 'Projects',
-		description: 'Snapshots from prototypes, whiteboards, and UI explorations.',
+		category: 'Team Works',
+		description: 'Quick captures from collaborative sprints, hackathons, and shared experiences.',
 		items: [
 			{
-				id: 'projects-1',
-				caption: 'Design handoff for companion app',
-				src: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=900&q=80',
+				id: 'teamworks-innovation-lab',
+				caption: 'Innovation lab sync',
+				src: skacasTeamWorkImage,
+				description: 'Sprint planning around the innovation lab workbench.',
 			},
 			{
-				id: 'projects-2',
-				caption: 'Component library sketches',
-				src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
+				id: 'teamworks-hackathon-floor',
+				caption: 'Hackathon floor review',
+				src: hacksporaEventImage,
+				description: 'Campus hackathon check-in with badge-ready crew.',
 			},
-			{
-				id: 'projects-3',
-				caption: 'Testing mobile flows with users',
-				src: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=900&q=80',
-			},
+			
 		],
 	},
-	{
-		category: 'Achievements',
-		description: 'Milestones, hackathons, and the walls of fame that keep me motivated.',
-		items: [
-			{
-				id: 'achievements-1',
-				caption: 'College tech symposium mention',
-				src: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
-			},
-			{
-				id: 'achievements-2',
-				caption: 'Poster presentation on AI ethics',
-				src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80',
-			},
-			{
-				id: 'achievements-3',
-				caption: 'Recognised for mentoring juniors',
-				src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
-			},
-		],
-	},
+
 	{
 		category: 'Experience',
-		description: 'Internship snapshots, workshops, and hands-on sessions.',
+		description: 'Real-time experience  and lab work building production apps and innovation prototypes.',
 		items: [
 			{
-				id: 'experience-1',
-				caption: 'Pair-programming at TechNova Labs',
-				src: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80',
+				id: 'Byts Tech Solutions',
+				caption: 'Byts Tech Solutions',
+				src: bytsImage,
+				description: 'Frontend development internship focusing on React and modern web technologies.',
 			},
 			{
-				id: 'experience-2',
-				caption: 'Data storytelling workshop',
-				src: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=900&q=80',
+				id: 'Crayond Technologies',
+				caption: 'Crayond Technologies',
+				src: crayondImage,
+				description: 'Full-stack internship building production applications with Next.js and Node.js.',
 			},
 			{
-				id: 'experience-3',
-				caption: 'Power BI dashboard review',
-				src: 'https://images.unsplash.com/photo-1476357471311-43c0db9fb2b4?auto=format&fit=crop&w=900&q=80',
+				id: 'Special Lab BIT',
+				caption: 'Special Lab BIT',
+				src: speciallabImage,
+				description: 'Innovation lab research on AI/ML prototypes and embedded systems.',
 			},
+			
 		],
 	},
 ];
@@ -311,40 +362,82 @@ export const certificates = [
 		provider: 'Oracle Certified',
 		year: '2025',
 		category: 'Cloud',
-		type: 'Other',
+		type: 'Courses',
 		technologies: ['Oracle Cloud', 'AI Foundations'],
 		link: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=47DE7E70BAA39A7EBE70C30C801F39FD52C3690A2DCD7589D2BAEB9E6560D1FA',
 		image: oracleCertificateImage,
+	},
+	{
+		id: 'cert-hackspora-2025',
+		title: 'HackSpora 2k25 – National Level 24 Hours Hackathon',
+		provider: 'Karpagam Academy of Higher Education',
+		year: '2025',
+		category: 'Hackathon',
+		type: 'Other',
+		summary: 'Participated in the AiQubit association’s HackSpora 2k25 national hackathon hosted by KAHE on 12–13 September 2025.',
+		technologies: [],
+		link: null,
+		image: hacksporaCertificateImage,
+	},
+	{
+		id: 'cert-viksit-bharat-2047',
+		title: 'Viksit Bharat @2047 – Ideas for the Vision',
+		provider: 'MyGov India',
+		year: '2024',
+		category: 'Innovation Challenge',
+		type: 'Other',
+		summary: 'Recognised for contributing ideas that support the national vision of Viksit Bharat by 2047.',
+		technologies: [],
+		link: null,
+		image: viksitBharatCertificateImage,
 	},
 ];
 
 export const blogPosts = [
 	{
-		id: 'blog-01',
-		title: 'Designing With Constraints: Shipping a Student Companion App',
+		id: 'blog-projects',
+		title: 'Projects & Portfolio',
 		preview:
-			'Notes on translating campus interviews, sticky notes, and feedback into a minimal release that still felt delightful.',
-		publishedOn: 'Oct 02, 2024',
-		likes: 24,
-		dislikes: 1,
-	},
-	{
-		id: 'blog-02',
-		title: 'Treating Documentation as a Feature',
-		preview:
-			'My process for building living docs with Storybook-style tables, API examples, and embedded Loom walkthroughs.',
-		publishedOn: 'Jul 18, 2024',
-		likes: 18,
+			'Showcasing web development, AI, and software projects I have built, including experiments with modern stacks and real-world problem solving.',
+		publishedOn: 'Updated Dec 2025',
+		likes: 0,
 		dislikes: 0,
 	},
 	{
-		id: 'blog-03',
-		title: 'Balancing Coursework and Freelance UI Audits',
+		id: 'blog-tech-insights',
+		title: 'Tech Insights',
 		preview:
-			'How planning templates, checklists, and Pomodoro blocks helped me support three freelance audits while acing finals.',
-		publishedOn: 'Apr 26, 2024',
-		likes: 32,
-		dislikes: 3,
+			'Tips, tutorials, and learnings from frontend, backend, and full-stack adventures covering everything from UI polish to API craftsmanship.',
+		publishedOn: 'Updated Dec 2025',
+		likes: 0,
+		dislikes: 0,
+	},
+	{
+		id: 'blog-growth',
+		title: 'Personal Growth',
+		preview:
+			'Reflections on learning new skills, solving challenging problems, and staying curious while exploring emerging technology.',
+		publishedOn: 'Updated Dec 2025',
+		likes: 0,
+		dislikes: 0,
+	},
+	{
+		id: 'blog-fun',
+		title: 'Fun & Hobbies',
+		preview:
+			'Ongoing notes about chess, badminton, or quirky experiments that keep me energised outside of code.',
+		publishedOn: 'Updated Dec 2025',
+		likes: 0,
+		dislikes: 0,
+	},
+	{
+		id: 'blog-future',
+		title: 'Future Goals',
+		preview:
+			'Aspirations, upcoming projects, and the next areas I am learning to stay ahead in tech and deliver meaningful work.',
+		publishedOn: 'Updated Dec 2025',
+		likes: 0,
+		dislikes: 0,
 	},
 ];
 
@@ -372,84 +465,72 @@ export const internships = [
 	{
 		id: 'intern-crayond',
 		company: "Crayon'D Software",
-		role: 'Full-stack Intern',
+		role: 'Frontend Web Developer',
 		period: 'Mar 2025 – Jun 2025 · BIT Sathy, India',
 		responsibilities: [
-			'Built responsive marketing pages and UI systems with Next.js, React, and Tailwind CSS.',
-			'Collaborated with senior engineers on production releases, code reviews, and deployment playbooks.',
-			'Engineered Node.js and Express APIs with robust validation, logging, and testing layers.',
-			'Explored full-stack workflows covering CI pipelines, version control, and observability basics.',
+			'Built responsive, user-friendly marketing pages and UI components using Next.js, React, and Tailwind CSS.',
+			'Collaborated with senior developers on production releases, code reviews, and deployment processes.',
+			'Developed and integrated Node.js and Express APIs with strong validation, logging, and basic testing workflows.',
+			'Gained hands-on exposure to full-stack development, including CI pipelines, version control, and fundamental observability practices.',
 		],
-		skillsGained: ['Next.js', 'Express.js', 'Component architecture', 'Git & GitHub'],
+		skillsGained: ['Next.js', 'React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'API Development', 'Git & GitHub', 'CI/CD'],
 	},
 ];
 
 export const resumeDetails = {
 	summary:
-		'Curious and reliable engineer crafting usable software, obsessed with pairing design thinking and rock-solid delivery.',
+		'Motivated Computer Science and Business Systems student with skills in web development, AI, and machine learning. Experienced in building responsive applications using HTML, CSS, JavaScript, React, and Next.js, with growing backend knowledge in Node.js and Express.js. Strong foundation in C, Python, Java, data analysis, and machine learning. Quick learner focused on solving problems, writing clean code, and contributing to innovative tech teams.',
 	personal: {
 		email: 'sheikabdullahpeer@gmail.com',
-		phone: '+91 97915 25488',
-		location: 'Chennai, India',
+		phone: '+91 9384753881',
+		location: 'Pallapatti, Tamil Nadu',
 		languages: ['English', 'Tamil', 'Hindi'],
 	},
 	education: [
 		{
-			school: 'Bannari Amman Institute of Technology',
-			program: 'B.Tech · Computer Science and Business Systems',
+			school: 'Bannari Amman Institute of Technology, Sathyamangalam',
+			program: 'B.Tech in Computer Science and Business Systems',
 			period: '2023 – 2027',
-			score: 'CGPA 7.65',
+			score: 'Current CGPA: 7.65',
 		},
 		{
-			school: 'Arumugam Academy Matric Hr. Sec. School',
-			program: 'Higher Secondary · CS-Maths',
-			period: '2021 – 2023',
-			score: '86%',
+			school: 'Arumugam Academy Matric Hr. Sec. School, Aravakuruchi',
+			program: 'Higher Secondary Education · CS-Maths Stream',
+			period: 'Completed - 2023',
+			score: 'Percentage: 86%',
+		},
+		{
+			school: "M.G.M Academy's High School, Virar (East)",
+			program: 'Secondary Education',
+			period: 'Completed – 2020',
+			score: 'Percentage: 65%',
 		},
 	],
 	experience: [
 		{
-			title: 'Full-stack Intern',
+			title: 'Frontend Web Developer',
 			company: "Crayon'D Software",
 			period: 'Mar 2025 – Jun 2025',
 			bullets: [
-				'Composed reusable design systems in Next.js and Tailwind, optimising for accessibility and performance.',
-				'Built Node.js + Express APIs with layered validation, monitoring hooks, and CI-backed deployments.',
-				'Partnered with cross-functional squads to deliver sprint outcomes while mentoring peers on Git hygiene.',
+				'Built responsive, user-friendly marketing pages and UI components using Next.js, React, and Tailwind CSS.',
+				'Collaborated with senior developers on production releases, code reviews, and deployment processes.',
+				'Developed and integrated Node.js and Express APIs with strong validation, logging, and basic testing workflows.',
+				'Gained hands-on exposure to full-stack development, including CI pipelines, version control, and fundamental observability practices.',
 			],
 		},
 	],
 	skills: [
-		'Next.js · React.js · Tailwind CSS',
-		'JavaScript · TypeScript · Component architecture',
+		'Next.js · React.js · Tailwind CSS · JavaScript · TypeScript ',
 		'Node.js · Express.js · REST APIs',
-		'Git & GitHub · Agile / Scrum · Postman',
-		'Problem solving · Collaboration · Clean code practices',
+		'Python (ML Libraries) · Data Analysis · Machine Learning Algorithms · Power BI · Data Visualization',
+		'Git & GitHub · Postman · Agile / Scrum · Problem Solving · Collaboration · Clean Code Practices',
 	],
-};
-
-export const aboutMe = {
-	introduction:
-		'I am an explorer at heart who loves translating business and user insights into interfaces that feel effortless. Whether it is sprinting through a hackathon or pairing with a designer, I keep the conversation centred on outcomes.',
-	educationHighlights: [
-		'Currently pursuing B.Tech CSBS at Bannari Amman Institute of Technology.',
-		'Active member of the UI/UX guild mentoring juniors on design critique.',
-		'Previously led school tech clubs focusing on robotics and app demos.',
-	],
-	extras: {
-		interests: ['Designing minimal workspaces', 'Long-form writing', 'Badminton'],
-		goals: [
-			'Join a product team that values research-backed decisions.',
-			'Contribute to open-source accessibility tooling.',
-			'Publish a monthly newsletter focused on student maker journeys.',
-		],
-	},
 };
 
 export const contactInfo = {
 	email: 'sheikabdullahpeer@gmail.com',
-	phone: '+91 97915 25488',
-	location: 'Chennai, India',
+	phone: '+91 9384753881',
+	location: 'Pallapatti, Tamil Nadu',
 	socials: [
 		{ label: 'GitHub', url: 'https://github.com/SHEIKABDULLAHPM', type: 'github' },
 		{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/peer-sheik-abdullah-mohd-noordeen-b97148276/', type: 'linkedin' },

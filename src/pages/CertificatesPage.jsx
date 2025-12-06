@@ -87,39 +87,41 @@ const CertificatesPage = () => {
 								key={cert.id}
 								className="flex h-full flex-col gap-4 rounded-3xl border border-transparent bg-white/5 p-5 shadow-[0_20px_45px_rgba(2,6,23,0.55)] transition"
 							>
-								<div className="flex items-start gap-3">
-									{hasImage ? (
-										<div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/10">
-											<img
-												src={cert.image}
-												alt={`${cert.provider} certificate badge`}
-												className="h-10 w-10 object-contain"
-											/>
-										</div>
-									) : null}
-									<div className="flex flex-1 flex-col gap-1.5">
-										<p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-indigo-300">{cert.provider}</p>
-										<h2 className="text-lg font-semibold leading-snug text-white">{cert.title}</h2>
-										{cert.summary ? <p className="text-sm text-slate-300">{cert.summary}</p> : null}
+								{hasImage ? (
+									<div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+										<img
+											src={cert.image}
+											alt={`${cert.provider} certificate`}
+											className="h-auto w-full object-contain transition duration-300 ease-out group-hover:scale-[1.01]"
+										/>
 									</div>
-									<span className="ml-auto text-sm font-semibold text-indigo-200">{cert.year}</span>
+								) : null}
+								<div className="flex flex-col gap-2">
+									<p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-indigo-300">{cert.provider}</p>
+									<h2 className="text-lg font-semibold leading-snug text-white">{cert.title}</h2>
+									{cert.summary ? <p className="text-sm text-slate-300">{cert.summary}</p> : null}
+								</div>
+								<div className="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200">
+									<span className="rounded-full border border-white/20 px-3 py-1">Issued {cert.year}</span>
+									<span className="rounded-full border border-white/15 px-3 py-1">{cert.category}</span>
 								</div>
 								<div className="flex flex-wrap gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200">
-									<span className="rounded-full border border-white/15 px-3 py-1">{cert.category}</span>
 									{(cert.technologies ?? []).map((tech) => (
 										<span key={tech} className="rounded-full border border-white/10 px-3 py-1">
 											{tech}
 										</span>
 									))}
 								</div>
-								<a
-									href={cert.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 transition-colors hover:text-white"
-								>
-									View credential <ArrowUpRight size={16} />
-								</a>
+								{cert.link ? (
+									<a
+										href={cert.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 transition-colors hover:text-white"
+									>
+										View credential <ArrowUpRight size={16} />
+									</a>
+								) : null}
 							</article>
 						);
 					})}

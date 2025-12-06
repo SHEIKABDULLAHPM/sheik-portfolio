@@ -103,52 +103,54 @@ const HomePage = () => {
   }, [displayedRole, isDeleting, roleIndex]);
 
   return (
-    <div className="space-y-6 lg:space-y-8">
-      <section className="grid items-center gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="space-y-4 animate-soft-slide">
-          <div className="space-y-2.5">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[9px] font-semibold uppercase tracking-[0.35em] text-indigo-200">
+    <div className="space-y-8 lg:space-y-12">
+      <section className="grid items-center gap-6 md:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)]">
+        <div className="space-y-5 animate-soft-slide">
+          <div className="space-y-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-indigo-200">
               <span className="h-2 w-2 rounded-full bg-indigo-400" />
               Introduction
             </span>
-            <h1 className="text-[clamp(2rem,3.2vw,3rem)] font-semibold leading-tight text-white">I'm Sheik Abdullah</h1>
-            <p className="text-sm font-medium text-slate-200 sm:text-base">
+            <h1 className="text-[clamp(1.85rem,4vw,2.9rem)] font-semibold leading-tight text-white md:leading-[1.05]">
+              I'm Sheik Abdullah
+            </h1>
+            <p className="text-sm font-medium text-slate-100 sm:text-base">
               {displayedRole}
               <span className="caret ml-1 text-indigo-300">|</span>
             </p>
-            <div className="flex gap-1.5 overflow-x-auto whitespace-nowrap pb-1">
+            <div className="flex flex-wrap gap-2 overflow-visible pb-1">
               {heroSkills.map((skill) => (
                 <span
                   key={skill}
-                  className="shrink-0 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-100"
+                  className="shrink-0 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-100"
                 >
                   {skill}
                 </span>
               ))}
             </div>
-            <p className="max-w-2xl text-xs text-slate-300 sm:text-sm">
+            <p className="max-w-2xl text-sm text-slate-300 text-balance sm:text-base">
               I focus on building reliable Java + Spring Boot services, pairing DSA discipline with experimentation across ML and AI initiatives.
             </p>
           </div>
-          <div className="grid gap-2 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {infoTiles.map(({ label, value, icon: Icon, href }) => {
               const isMailLink = href?.startsWith('mailto:');
               return (
-                <div key={label} className="flex h-full flex-col justify-center gap-2 rounded-2xl border border-white/10 bg-slate-900/70 p-2.5 text-[13px] shadow-lg shadow-indigo-500/10">
-                  <p className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.32em] text-indigo-200">
+                <div key={label} className="flex h-full flex-col justify-center gap-2 rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 text-sm shadow-lg shadow-indigo-500/10">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-indigo-200">
                     <Icon size={14} /> {label}
                   </p>
                   {href ? (
                     <a
                       href={href}
-                      className="text-[13px] font-medium text-white break-words"
+                      className="break-words text-sm font-medium text-white"
                       target={isMailLink ? undefined : '_blank'}
                       rel={isMailLink ? undefined : 'noopener noreferrer'}
                     >
                       {value}
                     </a>
                   ) : (
-                    <p className="text-[13px] font-medium text-white">{value}</p>
+                    <p className="text-sm font-medium text-white">{value}</p>
                   )}
                 </div>
               );
@@ -156,9 +158,9 @@ const HomePage = () => {
           </div>
         </div>
         <div className="relative flex items-center justify-center">
-          <div className="absolute h-68 w-68 rounded-full bg-gradient-to-tr from-indigo-500 via-sky-400 to-emerald-300 blur-3xl opacity-60 glow-pulse" />
-          <div className="relative w-full max-w-[320px] rounded-[32px] border border-white/10 bg-slate-900/70 p-4 shadow-2xl shadow-indigo-500/20 backdrop-blur">
-            <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-white/10">
+          <div className="absolute h-64 w-64 rounded-full bg-gradient-to-tr from-indigo-500 via-sky-400 to-emerald-300 blur-3xl opacity-60 glow-pulse sm:h-72 sm:w-72" />
+          <div className="relative w-full max-w-[280px] rounded-[32px] border border-white/10 bg-slate-900/70 p-4 shadow-2xl shadow-indigo-500/20 backdrop-blur sm:max-w-[320px]">
+            <div className="relative mx-auto aspect-[3/4] w-full overflow-hidden rounded-[22px] border border-white/10">
               <img src={profile.image} alt={profile.name} className="h-full w-full object-cover" loading="lazy" />
               <div className="pointer-events-none absolute inset-0 rounded-[22px] border border-white/5" />
             </div>
@@ -167,10 +169,10 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="grid gap-3 lg:grid-cols-2">
-        <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10">
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10 sm:p-5">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-indigo-200">Social Links</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-sm">Social Links</p>
             <p className="text-xs text-slate-400">LinkedIn · Instagram · Facebook</p>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -189,9 +191,9 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-        <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10">
+        <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10 sm:p-5">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-indigo-200">See what I'm doing</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-sm">See what I'm doing</p>
             <p className="text-xs text-slate-400">GitHub · LeetCode · HackerRank · CodeChef</p>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">

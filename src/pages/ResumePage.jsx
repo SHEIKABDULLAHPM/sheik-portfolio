@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Download, Eye, Info } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
 import { resumeDetails } from '../data/siteContent.js';
+import resumePdf from '../assets/sheik resume.pdf';
 
 const ResumePage = () => {
   const [showPreview, setShowPreview] = useState(false);
@@ -15,8 +16,8 @@ const ResumePage = () => {
 
       <div className="flex flex-wrap gap-3">
         <a
-          href="/resume.pdf"
-          download
+          href={resumePdf}
+          download="Sheik_Abdullah_Resume.pdf"
           className="inline-flex items-center gap-2 rounded-2xl bg-indigo-500 px-5 py-3 text-sm font-semibold text-white"
         >
           <Download size={16} /> Download Resume
@@ -61,11 +62,15 @@ const ResumePage = () => {
         <div className="space-y-3">
           {resumeDetails.education.map((school) => (
             <div key={school.school} className="rounded-2xl border border-slate-800/60 bg-slate-950/60 p-4">
-              <h3 className="text-xl font-semibold text-white">{school.school}</h3>
-              <p className="text-sm text-slate-300">{school.program}</p>
-              <div className="mt-2 flex flex-wrap gap-3 text-xs text-slate-400">
-                <span>{school.period}</span>
-                <span>{school.score}</span>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-white">{school.school}</h3>
+                  <p className="text-sm text-slate-300">{school.program}</p>
+                </div>
+                <div className="flex flex-col gap-1 text-right sm:text-right">
+                  <span className="text-sm font-medium text-slate-200">{school.period}</span>
+                  <span className="text-sm text-emerald-400">{school.score}</span>
+                </div>
               </div>
             </div>
           ))}
@@ -99,7 +104,12 @@ const ResumePage = () => {
       {showPreview ? (
         <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-lg shadow-indigo-500/5">
           <div className="aspect-[8.5/11] w-full overflow-hidden rounded-2xl border border-slate-800">
-            <iframe title="Resume preview" src="/resume.pdf" className="h-full w-full" />
+            <iframe 
+              title="Resume preview" 
+              src={resumePdf} 
+              className="h-full w-full" 
+              type="application/pdf"
+            />
           </div>
         </div>
       ) : null}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400">
+  <defs>
+    <linearGradient id="vikshit-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" rx="26" ry="26" fill="#fef3c7" stroke="#7c3aed" stroke-width="6" />
+  <rect x="24" y="24" width="592" height="352" rx="20" ry="20" fill="url(#vikshit-gradient)" />
+  <rect x="44" y="44" width="552" height="312" rx="16" ry="16" fill="#ede9fe" stroke="#a855f7" stroke-width="2" />
+  <text x="50%" y="100" text-anchor="middle" font-family="'Playfair Display', 'Georgia', serif" font-size="26" fill="#4c1d95">
+    Ideas for the Vision
+  </text>
+  <text x="50%" y="135" text-anchor="middle" font-family="'Playfair Display', 'Georgia', serif" font-size="32" fill="#1e1b4b">
+    VIKSIT BHARAT @ 2047
+  </text>
+  <text x="50%" y="195" text-anchor="middle" font-family="'Poppins', 'Segoe UI', sans-serif" font-size="16" fill="#4338ca">
+    Certificate of Participation is awarded to
+  </text>
+  <text x="50%" y="230" text-anchor="middle" font-family="'Poppins', 'Segoe UI', sans-serif" font-size="22" fill="#1f2937">
+    Peer Sheik Abdullah Mohd Noordeen
+  </text>
+  <text x="50%" y="265" text-anchor="middle" font-family="'Poppins', 'Segoe UI', sans-serif" font-size="15" fill="#4338ca">
+    for contributing ideas towards realizing the vision of
+  </text>
+  <text x="50%" y="300" text-anchor="middle" font-family="'Poppins', 'Segoe UI', sans-serif" font-size="22" fill="#dc2626">
+    Viksit Bharat by 2047
+  </text>
+</svg>

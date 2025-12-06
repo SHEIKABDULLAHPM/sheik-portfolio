@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import heroPortrait from '../assets/sheik-abdullah.jpg';
-
+import resumePdf from '../assets/sheik resume.pdf';
 const heroVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
@@ -59,7 +59,7 @@ const Hero = () => {
         </p>
         <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
           <a
-            href="/resume.pdf"
+            href={resumePdf}
             className="group relative inline-flex transform-gpu items-center justify-center overflow-hidden rounded-full bg-indigo-500 px-10 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all duration-500 will-change-transform hover:-translate-y-1 hover:bg-indigo-400 sm:px-9 sm:py-3.5 sm:text-sm lg:text-base"
             style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
           >

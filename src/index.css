@@ -15,24 +15,45 @@
 	--accent: #8c8cff;
 	--accent-strong: #6366f1;
 	--accent-soft: rgba(99, 102, 241, 0.12);
+	--layout-max-width: min(1200px, 94vw);
+	--page-padding: clamp(1.25rem, 4vw, 3rem);
+	--radius-xl: 28px;
+	--radius-lg: 22px;
 }
 
 @layer base {
 	html {
 		scroll-behavior: smooth;
-		scroll-padding-top: 5.5rem;
+		scroll-padding-top: clamp(4.5rem, 6vw, 5.5rem);
 	}
 
 	body {
-		min-height: 100vh;
+		min-height: 100dvh;
 		margin: 0;
 		font-family: 'Sora', 'Space Grotesk', 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-		font-size: 15px;
-		line-height: 1.6;
+		font-size: clamp(0.95rem, 0.24vw + 0.88rem, 1.05rem);
+		line-height: 1.65;
+		letter-spacing: 0.01em;
 		background-color: var(--page-bg);
 		color: var(--text-primary);
+		accent-color: var(--accent-strong);
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-weight: 600;
+		line-height: 1.15;
+		color: var(--text-primary);
+		text-wrap: balance;
+	}
+
+	p {
+		line-height: 1.7;
+		color: var(--text-primary);
 	}
 
 	img {
@@ -168,15 +189,16 @@ body::after {
 
 @layer components {
 	.content-shell {
-		@apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+		@apply mx-auto w-full px-4 sm:px-6 lg:px-8 xl:px-10;
+		max-width: var(--layout-max-width);
 	}
 
 	.surface {
-		@apply rounded-[24px] border border-white/10 bg-white/5 p-5 shadow-[0_20px_50px_rgba(2,6,23,0.5)] backdrop-blur-xl;
+		@apply rounded-[24px] border border-white/10 bg-white/5 p-4 sm:p-5 lg:p-6 shadow-[0_20px_50px_rgba(2,6,23,0.5)] backdrop-blur-xl;
 	}
 
 	.surface-tight {
-		@apply rounded-[20px] border border-white/10 bg-white/5 p-4 shadow-[0_16px_35px_rgba(2,6,23,0.45)] backdrop-blur-lg;
+		@apply rounded-[20px] border border-white/10 bg-white/5 p-3.5 sm:p-4 shadow-[0_16px_35px_rgba(2,6,23,0.45)] backdrop-blur-lg;
 	}
 
 	.eyebrow {
@@ -184,15 +206,15 @@ body::after {
 	}
 
 	.page-heading {
-		@apply mb-10 text-left;
+		@apply mb-8 text-left sm:mb-10;
 	}
 
 	.page-heading h1 {
-		@apply text-balance text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] text-white;
+		@apply text-balance text-[clamp(1.75rem,3.8vw,2.85rem)] font-semibold leading-[1.05] text-white;
 	}
 
 	.page-heading p {
-		@apply max-w-3xl text-sm text-slate-300 sm:text-base;
+		@apply max-w-3xl text-sm text-slate-300/90 sm:text-base;
 	}
 
 	.btn-primary {
@@ -205,6 +227,35 @@ body::after {
 
 	.stat-grid {
 		@apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+	}
+}
+
+@media (max-width: 640px) {
+	body {
+		font-size: clamp(0.92rem, 1.2vw + 0.72rem, 1rem);
+		line-height: 1.6;
+	}
+
+	.content-shell {
+		padding-left: 1.1rem;
+		padding-right: 1.1rem;
+	}
+
+	.surface {
+		border-radius: 22px;
+		padding: 1.15rem;
+	}
+
+	.page-heading {
+		margin-bottom: 1.5rem;
+	}
+
+	.page-heading h1 {
+		font-size: clamp(1.6rem, 7vw, 2.3rem);
+	}
+
+	.page-heading p {
+		font-size: 0.95rem;
 	}
 }
 

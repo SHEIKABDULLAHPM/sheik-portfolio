@@ -8,17 +8,22 @@ const InternshipPage = () => (
       title="Internship Experience"
       subtitle="Industry Experience"
     />
-    <div className="space-y-5">
+    <div className="space-y-8">
       {internships.map((item) => (
-        <article key={item.id} className="space-y-4 rounded-3xl border border-white/5 bg-slate-900/70 p-6 shadow-lg shadow-indigo-500/5">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-indigo-300">
-                <Briefcase size={16} /> {item.company}
-              </p>
-              <h2 className="text-2xl font-semibold text-white">{item.role}</h2>
+        <article key={item.id} className="space-y-6 rounded-3xl border border-white/5 bg-slate-900/70 p-8 shadow-lg shadow-indigo-500/5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 border border-indigo-500/30">
+                  <Briefcase size={24} className="text-indigo-400" />
+                </div>
+                <p className="text-lg font-bold tracking-wide text-indigo-300">
+                  {item.company}
+                </p>
+              </div>
+              <h2 className="text-3xl font-semibold text-white leading-tight">{item.role}</h2>
             </div>
-            <span className="text-sm text-slate-400">{item.period}</span>
+            <span className="text-base font-medium text-slate-400 sm:text-right">{item.period}</span>
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">Key Responsibilities</p>

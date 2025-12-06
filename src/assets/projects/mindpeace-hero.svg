@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">MindPeace landing page hero mockup</title>
+  <desc id="desc">Gradient hero with bold headline and call to action buttons inspired by the MindPeace mental wellness platform.</desc>
+  <defs>
+    <linearGradient id="mp-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b103a" />
+      <stop offset="45%" stop-color="#3b1696" />
+      <stop offset="100%" stop-color="#7c2ae8" />
+    </linearGradient>
+    <linearGradient id="cta" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5f8cff" />
+      <stop offset="100%" stop-color="#9a79ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#mp-bg)" />
+  <text x="140" y="200" font-family="'Poppins', 'Inter', sans-serif" font-size="80" font-weight="700" fill="#ffffff">Your Journey to</text>
+  <text x="140" y="280" font-family="'Poppins', 'Inter', sans-serif" font-size="90" font-weight="700" fill="#7ac4ff">Mental Wellness</text>
+  <text x="140" y="360" font-family="'Poppins', 'Inter', sans-serif" font-size="80" font-weight="700" fill="#ffffff">Starts Here</text>
+  <text x="140" y="420" font-family="'Inter', sans-serif" font-size="26" fill="#d8d7ff" opacity="0.9">Discover personalised insights and track your emotional journey with MindPeace.</text>
+  <g>
+    <rect x="140" y="460" width="220" height="68" rx="34" fill="url(#cta)" />
+    <text x="180" y="505" font-family="'Inter', sans-serif" font-size="28" font-weight="600" fill="#ffffff">Start Journey</text>
+    <rect x="380" y="460" width="220" height="68" rx="34" fill="#121b49" stroke="#6d6cff" stroke-width="2" opacity="0.9" />
+    <text x="430" y="505" font-family="'Inter', sans-serif" font-size="28" font-weight="600" fill="#cfd8ff">Learn More</text>
+  </g>
+  <g opacity="0.85">
+    <rect x="870" y="130" width="260" height="70" rx="30" fill="#121b49" stroke="#6d6cff" stroke-width="2" />
+    <circle cx="900" cy="165" r="16" fill="#7ac4ff" />
+    <text x="930" y="175" font-family="'Inter', sans-serif" font-size="26" fill="#cfd8ff">Mood Tracker</text>
+  </g>
+  <g>
+    <rect x="860" y="240" width="300" height="360" rx="40" fill="#130d3c" stroke="#7445ff" stroke-width="3" opacity="0.9" />
+    <text x="900" y="290" font-family="'Inter', sans-serif" font-size="26" fill="#e2ddff">Daily Reflection</text>
+    <rect x="890" y="315" width="240" height="24" rx="12" fill="#261f5e" />
+    <rect x="890" y="355" width="200" height="20" rx="10" fill="#2f2b64" />
+    <rect x="890" y="395" width="260" height="20" rx="10" fill="#2f2b64" />
+    <g>
+      <rect x="900" y="450" width="100" height="100" rx="22" fill="#221c56" />
+      <rect x="1010" y="450" width="100" height="100" rx="22" fill="#221c56" />
+      <rect x="900" y="560" width="210" height="28" rx="14" fill="#2b2360" />
+    </g>
+  </g>
+</svg>

@@ -13,6 +13,8 @@ const navigationLinks = [
   { label: 'About', path: '/about' },
 ];
 
+const MOBILE_MENU_ID = 'mobile-nav-panel';
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,19 +29,57 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    if (typeof document === 'undefined') {
+      return undefined;
+    }
     document.body.classList.toggle('overflow-hidden', open);
-    return () => document.body.classList.remove('overflow-hidden');
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (event) => {
+      if (event.matches) {
+        setOpen(false);
+      }
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (!open || typeof window === 'undefined') {
+      return undefined;
+    }
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open]);
 
   const linkClass = useMemo(
     () =>
       ({ isActive }) =>
-        `rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+        `rounded-full px-3.5 py-1.5 text-[0.85rem] font-semibold transition-colors ${
           isActive
             ? 'bg-white/15 text-white'
             : 'text-slate-300 hover:text-white hover:bg-white/5'
         }`,
-    []
+    [],
   );
 
   return (
@@ -50,22 +90,22 @@ const Navbar = () => {
           : 'bg-slate-950/40 backdrop-blur-md'
       }`}
     >
-      <nav className="content-shell flex items-center justify-between py-4">
-        <Link to="/" className="text-2xl font-semibold tracking-tight text-white sm:text-[2rem]">
-          sheik<span className="text-indigo-300">.</span>
+      <nav aria-label="Primary" className="content-shell flex flex-wrap items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
+        <Link to="/" className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+          Sheik<span className="text-indigo-300"> .</span>
         </Link>
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-1.5 lg:flex xl:gap-2">
           {navigationLinks.map((link) => (
             <NavLink key={link.path} to={link.path} className={linkClass} onClick={() => setOpen(false)}>
               {link.label}
             </NavLink>
           ))}
         </div>
-        <div className="hidden items-center gap-3 lg:flex">
-          <NavLink to="/resume" className="btn-secondary px-4 py-2 text-xs uppercase tracking-wide">
+        <div className="hidden items-center gap-2 lg:flex">
+          <NavLink to="/resume" className="btn-secondary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]">
             Resume
           </NavLink>
-          <Link to="/contact" className="btn-primary px-4 py-2 text-xs uppercase tracking-wide">
+          <Link to="/contact" className="btn-primary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]">
             Let&apos;s talk
           </Link>
         </div>
@@ -74,44 +114,48 @@ const Navbar = () => {
           className="rounded-full border border-white/10 p-2 text-slate-100 lg:hidden"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          aria-controls={MOBILE_MENU_ID}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
       {open ? (
         <>
-          <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)} />
-          <div className="content-shell lg:hidden">
-            <div className="surface z-50 mt-3 flex flex-col gap-2 p-4">
-              {navigationLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `rounded-2xl px-4 py-3 text-base font-medium ${
-                      isActive ? 'bg-white/15 text-white' : 'text-slate-200'
-                    }`
-                  }
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-              <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                <NavLink
-                  to="/resume"
-                  className="rounded-2xl border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
-                  onClick={() => setOpen(false)}
-                >
-                  Resume
-                </NavLink>
-                <Link
-                  to="/contact"
-                  className="rounded-2xl bg-indigo-500 px-4 py-3 text-center text-sm font-semibold text-white"
-                  onClick={() => setOpen(false)}
-                >
-                  Let&apos;s talk
-                </Link>
+          <div className="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)} />
+          <div className="fixed inset-x-0 top-[4.25rem] z-50 px-4 pb-8 sm:top-[4.75rem] sm:px-6 lg:hidden">
+            <div className="mx-auto w-full max-w-xl" id={MOBILE_MENU_ID}>
+              <div className="mt-0 flex max-h-[70vh] flex-col gap-2 overflow-y-auto rounded-[28px] border border-white/12 bg-gradient-to-b from-[#080f2d]/95 via-[#050b20]/95 to-[#02060f]/98 p-4 shadow-[0_25px_80px_rgba(2,6,23,0.65)] backdrop-blur-2xl">
+                {navigationLinks.map((link) => (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `rounded-2xl px-4 py-3 text-sm font-semibold tracking-wide ${
+                        isActive ? 'bg-white/15 text-white' : 'text-slate-200 hover:bg-white/10'
+                      }`
+                    }
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  <NavLink
+                    to="/resume"
+                    className="rounded-2xl border border-white/15 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+                    onClick={() => setOpen(false)}
+                  >
+                    Resume
+                  </NavLink>
+                  <Link
+                    to="/contact"
+                    className="rounded-2xl bg-indigo-500 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+                    onClick={() => setOpen(false)}
+                  >
+                    Let&apos;s talk
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
