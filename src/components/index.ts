@@ -6,3 +6,5 @@ export { default as ProjectCard } from './ProjectCard.jsx';
 export { default as Footer } from './Footer.jsx';
 export { default as BackgroundParticles } from './BackgroundParticles.jsx';
 export { default as CertificateCarousel } from './CertificateCarousel.jsx';
+export { default as AppLayout } from './AppLayout.jsx';
+export { default as PageHeader } from './PageHeader.jsx';

@@ -15,6 +15,15 @@ import { Pin } from 'lucide-react';
  *   onHoverChange?: (isHovering: boolean) => void;
  *   isPinned?: boolean;
  *   onPinToggle?: () => void;
+ *   accent?: {
+ *     chipBg?: string;
+ *     chipBorder?: string;
+ *     chipText?: string;
+ *     barGradientFrom?: string;
+ *     barGradientVia?: string;
+ *     barGradientTo?: string;
+ *     barShadow?: string;
+ *   };
  * }} props
  */
 const SkillCard = ({
@@ -25,10 +34,21 @@ const SkillCard = ({
   onHoverChange,
   isPinned = false,
   onPinToggle,
+  accent,
 }) => {
   const skillItems = items ?? [];
   const hasDetails = skillItems.length > 0;
   const isExpanded = isPinned || expanded;
+
+  const {
+    chipBg = 'bg-indigo-500/15',
+    chipBorder = 'border-indigo-400/40',
+    chipText = 'text-indigo-100',
+    barGradientFrom = 'from-indigo-400',
+    barGradientVia = 'via-purple-400',
+    barGradientTo = 'to-indigo-500',
+    barShadow = 'shadow-sm shadow-indigo-500/40',
+  } = accent ?? {};
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -51,7 +71,7 @@ const SkillCard = ({
   const helperText = isPinned
     ? 'Pinned · click to unpin'
     : isExpanded
-      ? 'Hover away to hide proficiency'
+      ? 'Hover away to hide'
       : 'Click to pin or hover to preview';
 
   const handleActivate = useCallback(
@@ -101,7 +121,7 @@ const SkillCard = ({
 
   return (
     <motion.div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform group-hover:border-indigo-400/60 group-hover:bg-slate-900/95 group-hover:shadow-indigo-500/25 sm:p-6 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform sm:p-6 ${
         hasDetails ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50' : ''
       }`}
       style={{ transition: 'border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
@@ -174,6 +194,23 @@ const SkillCard = ({
           >
             {helperText}
           </motion.p>
+          <motion.div
+            className="relative mt-3 flex flex-wrap gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.28, ease: [0.48, 0.04, 0.32, 0.9] }}
+          >
+            {skillItems.map((item) => (
+              <span
+                key={`${item.name}-preview`}
+                className={`inline-flex items-center rounded-xl border px-3 py-1 text-xs font-semibold uppercase tracking-wide transition-opacity duration-300 ${
+                  isExpanded ? 'opacity-100' : 'opacity-90 group-hover:opacity-100'
+                } ${chipBg} ${chipBorder} ${chipText}`}
+              >
+                {item.name}
+              </span>
+            ))}
+          </motion.div>
           <AnimatePresence initial={false}>
             {isExpanded ? (
               <motion.ul
@@ -189,19 +226,23 @@ const SkillCard = ({
                   return (
                     <motion.li
                       key={item.name}
-                      className="space-y-2"
+                      className="space-y-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 p-3 shadow-sm shadow-slate-900/30"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
                       transition={{ duration: 0.2, ease: [0.48, 0.04, 0.32, 0.9] }}
                     >
                       <div className="flex items-center justify-start gap-3">
-                        <span className="font-medium text-white">{item.name}</span>
+                        <span
+                          className={`inline-flex items-center rounded-xl border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${chipBg} ${chipBorder} ${chipText}`}
+                        >
+                          {item.name}
+                        </span>
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800/80">
                           <motion.div
-                            className="h-2 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-500 shadow-sm shadow-indigo-500/50 will-change-transform"
+                            className={`h-2 rounded-full bg-gradient-to-r ${barGradientFrom} ${barGradientVia} ${barGradientTo} ${barShadow} will-change-transform`}
                             initial={{ width: 0 }}
                             animate={{ width: `${pct}%` }}
                             exit={{ width: 0 }}

@@ -1,41 +1,33 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { contactInfo } from '../data/siteContent.js';
 
-const socials = [
-  {
-    label: 'Email',
-    href: 'mailto:sheikabdullahpeer@gmail.com',
-    icon: Mail,
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/peer-sheik-abdullah-mohd-noordeen-b97148276/',
-    icon: Linkedin,
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/SHEIKABDULLAHPM',
-    icon: Github,
-  },
-];
+const iconMap = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  mail: Mail,
+};
 
 const Footer = () => (
-  <footer className="border-t border-slate-800/80 bg-slate-950/90 py-5 sm:py-6">
-    <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 text-sm text-slate-300 sm:flex-row sm:px-6">
-      <p className="text-center text-slate-400 sm:text-left">&copy; {new Date().getFullYear()} Sheik Abdullah. All rights reserved.</p>
-      <div className="flex items-center gap-4">
-        {socials.map(({ label, href, icon: Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-slate-900/60 text-indigo-200 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
-            aria-label={label}
-          >
-            <Icon size={18} className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
-            <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-indigo-500/30 via-transparent to-purple-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          </a>
-        ))}
+  <footer className="border-t border-white/5 bg-slate-950/95">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>© {new Date().getFullYear()} Peer Sheik Abdullah · Crafted with care.</p>
+      <div className="flex flex-wrap gap-3">
+        {contactInfo.socials.map((item) => {
+          const Icon = iconMap[item.type] ?? Mail;
+          return (
+            <a
+              key={item.label}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-indigo-500 hover:text-white"
+            >
+              <Icon size={14} />
+              {item.label}
+            </a>
+          );
+        })}
       </div>
     </div>
   </footer>

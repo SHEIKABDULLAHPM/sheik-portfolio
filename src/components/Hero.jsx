@@ -36,7 +36,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 pt-24 text-center scroll-mt-28 sm:px-6 sm:pt-28 sm:scroll-mt-32 lg:flex-row lg:items-center lg:justify-between lg:pt-24 lg:text-left"
+      className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 pt-24 text-center sm:px-6 sm:pt-28 lg:flex-row lg:items-center lg:justify-between lg:pt-24 lg:text-left"
     >
       <motion.div
         className="max-w-xl space-y-6"
