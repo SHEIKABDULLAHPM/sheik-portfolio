@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
 import { gallery } from '../data/siteContent.js';
@@ -29,12 +29,34 @@ const GalleryPage = () => {
   const [activeDomain, setActiveDomain] = useState('All');
   const [itemsPerPage, setItemsPerPage] = useState(() => getItemsPerPage());
   const [startIndexMap, setStartIndexMap] = useState(() => createIndexMap());
+  const resizeFrameRef = useRef(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
     const updateItemsPerPage = () => setItemsPerPage(getItemsPerPage());
+
+    const handleResize = () => {
+      if (resizeFrameRef.current !== null) {
+        return;
+      }
+      resizeFrameRef.current = window.requestAnimationFrame(() => {
+        resizeFrameRef.current = null;
+        updateItemsPerPage();
+      });
+    };
+
     updateItemsPerPage();
-    window.addEventListener('resize', updateItemsPerPage);
-    return () => window.removeEventListener('resize', updateItemsPerPage);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeFrameRef.current !== null) {
+        window.cancelAnimationFrame(resizeFrameRef.current);
+        resizeFrameRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -81,22 +103,24 @@ const GalleryPage = () => {
   };
 
   return (
-    <div className="space-y-10 lg:space-y-12">
+    <div className="space-y-10 sm:space-y-12">
       <PageHeader
         title="Gallery"
         subtitle="Visual Highlights"
         description="Snapshots from prototypes, campus life, and micro-moments that inform my design taste."
       />
-      <section className="surface space-y-4 sm:space-y-5">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-slate-300 sm:text-[11px]">Filter by domain</p>
+      <section className="surface-tight space-y-4">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-300">Filter by domain</p>
         <div className="flex flex-wrap gap-2">
           {domainFilters.map((domain) => (
             <button
               key={domain}
               type="button"
               onClick={() => handleDomainChange(domain)}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] transition sm:text-[0.75rem] ${
-                activeDomain === domain ? 'border-white/30 bg-white/10 text-white' : 'border-white/15 text-slate-200 hover:border-white/30'
+              className={`flex w-full items-center justify-center rounded-full border px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition sm:w-auto sm:px-4 ${
+                activeDomain === domain
+                  ? 'border-white/30 bg-white/10 text-white shadow-sm shadow-white/10'
+                  : 'border-white/15 text-slate-200 hover:border-white/30'
               }`}
             >
               {domain}
@@ -112,17 +136,19 @@ const GalleryPage = () => {
         const canGoPrev = startIndex > 0;
         const canGoNext = startIndex < maxStart;
         return (
-          <section key={section.category} className="surface space-y-5 p-4 sm:p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="space-y-1.5">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-xs">{section.category}</div>
-                <p className="max-w-2xl text-sm text-slate-300 sm:text-base truncate">{section.description}</p>
+          <section key={section.category} className="surface space-y-5 sm:space-y-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="space-y-2">
+                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-200">{section.category}</div>
+                <p className="max-w-2xl text-sm text-slate-300/85 sm:text-base">
+                  {section.description}
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   aria-label={`Show previous ${section.category} images`}
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-slate-950/80 p-2 text-white shadow-xl shadow-black/30 transition hover:border-white/40 hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/15 disabled:hover:bg-slate-950/80"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-white shadow-xl shadow-black/30 transition hover:border-white/40 hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/15 disabled:hover:bg-slate-950/80"
                   onClick={() => handleNavigation(section.category, 'prev', totalItems)}
                   disabled={!canGoPrev}
                 >
@@ -131,7 +157,7 @@ const GalleryPage = () => {
                 <button
                   type="button"
                   aria-label={`Show next ${section.category} images`}
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-slate-950/80 p-2 text-white shadow-xl shadow-black/30 transition hover:border-white/40 hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/15 disabled:hover:bg-slate-950/80"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-white shadow-xl shadow-black/30 transition hover:border-white/40 hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/15 disabled:hover:bg-slate-950/80"
                   onClick={() => handleNavigation(section.category, 'next', totalItems)}
                   disabled={!canGoNext}
                 >
@@ -139,22 +165,22 @@ const GalleryPage = () => {
                 </button>
               </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {visibleItems.map((item) => (
                 <article
                   key={item.id}
-                  className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-slate-950/50 p-3 transition hover:border-white/35"
+                  className="surface-tight space-y-3 transition hover:border-white/35 hover:bg-white/10"
                 >
-                  <div className="overflow-hidden rounded-xl border border-white/5">
+                  <div className="relative overflow-hidden rounded-xl border border-white/8 bg-black/20 aspect-[4/3] sm:aspect-[3/2]">
                     <img
                       src={item.src}
                       alt={item.caption || 'Gallery visual'}
-                      className="h-48 w-full object-cover sm:h-56 lg:h-52"
+                      className="absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
                     />
                   </div>
                   {item.description ? (
-                    <p className="text-xs font-medium text-slate-200/85 sm:text-sm truncate">
+                    <p className="text-xs font-medium text-slate-200/85 sm:text-sm">
                       {formatDescription(item.description)}
                     </p>
                   ) : null}

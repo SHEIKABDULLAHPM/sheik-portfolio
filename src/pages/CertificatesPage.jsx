@@ -23,18 +23,18 @@ const CertificatesPage = () => {
 	const activeLabel = isShowingAll ? 'All credentials' : `${activeFilter} only`;
 
 	return (
-		<div className="space-y-10">
+		<div className="space-y-12">
 			<PageHeader
 				title="Certificates & Courses"
 				subtitle="Professional Credentials"
 				description="Formal coursework and proofs of learning that back my hands-on projects."
 			/>
 
-			<section className="surface space-y-5">
+			<section className="surface space-y-6">
 				<div className="flex flex-wrap items-center justify-between gap-4">
 					<div>
-						<p className="text-xs font-semibold uppercase tracking-[0.4em] text-indigo-200">Filter</p>
-						<p className="text-base text-slate-300">Keep things tidy by toggling categories or showing everything.</p>
+						<p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">Filter</p>
+						<p className="text-sm text-slate-300/80 sm:text-base">Keep things tidy by toggling categories or showing everything.</p>
 					</div>
 					<button
 						type="button"
@@ -75,7 +75,7 @@ const CertificatesPage = () => {
 				<p>
 					Showing {filteredCertificates.length} of {totalCertificates}
 				</p>
-				<p className="text-xs uppercase tracking-[0.3em] text-indigo-200">{activeLabel}</p>
+				<p className="text-xs uppercase tracking-[0.22em] text-indigo-200">{activeLabel}</p>
 			</div>
 
 			{filteredCertificates.length ? (
@@ -85,7 +85,7 @@ const CertificatesPage = () => {
 						return (
 							<article
 								key={cert.id}
-								className="flex h-full flex-col gap-4 rounded-3xl border border-transparent bg-white/5 p-5 shadow-[0_20px_45px_rgba(2,6,23,0.55)] transition"
+								className="surface-tight flex h-full flex-col gap-4"
 							>
 								{hasImage ? (
 									<div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
@@ -97,15 +97,15 @@ const CertificatesPage = () => {
 									</div>
 								) : null}
 								<div className="flex flex-col gap-2">
-									<p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-indigo-300">{cert.provider}</p>
-									<h2 className="text-lg font-semibold leading-snug text-white">{cert.title}</h2>
-									{cert.summary ? <p className="text-sm text-slate-300">{cert.summary}</p> : null}
+									<p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-indigo-200">{cert.provider}</p>
+									<h2 className="text-[clamp(1rem,2vw,1.2rem)] font-semibold leading-snug text-white">{cert.title}</h2>
+									{cert.summary ? <p className="text-sm text-slate-300/90">{cert.summary}</p> : null}
 								</div>
-								<div className="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200">
+								<div className="flex flex-wrap gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-indigo-200">
 									<span className="rounded-full border border-white/20 px-3 py-1">Issued {cert.year}</span>
 									<span className="rounded-full border border-white/15 px-3 py-1">{cert.category}</span>
 								</div>
-								<div className="flex flex-wrap gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200">
+								<div className="flex flex-wrap gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-indigo-200">
 									{(cert.technologies ?? []).map((tech) => (
 										<span key={tech} className="rounded-full border border-white/10 px-3 py-1">
 											{tech}

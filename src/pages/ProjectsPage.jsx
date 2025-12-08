@@ -104,7 +104,7 @@ const ProjectsPage = () => {
 									<p className="text-[0.7rem] font-medium uppercase tracking-[0.28em] text-slate-300">
 										{(project.filters && project.filters.length > 0 ? project.filters : ['General']).join(' • ')}
 									</p>
-									<h2 className="text-[clamp(1.15rem,2.8vw,1.35rem)] font-semibold leading-snug text-white">
+									<h2 className="text-[clamp(1.1rem,2.4vw,1.3rem)] font-semibold leading-snug text-white">
 										{project.title}
 									</h2>
 									<p className="text-sm text-slate-300/90">{project.description}</p>

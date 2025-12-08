@@ -1,68 +1,73 @@
-import { useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { PointMaterial, Points, Preload } from '@react-three/drei';
+import { useMemo } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
-const generatePositions = (count, radius) => {
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i += 1) {
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    const r = radius * Math.cbrt(Math.random());
-    const sinPhi = Math.sin(phi);
-    const index = i * 3;
-    positions[index] = r * sinPhi * Math.cos(theta);
-    positions[index + 1] = r * Math.cos(phi);
-    positions[index + 2] = r * sinPhi * Math.sin(theta);
-  }
-  return positions;
-};
+const BASE_ORBS = [
+  { id: 'orb-1', top: '8%', left: '6%', size: 420, hue: 'rgba(99,102,241,0.28)', blur: 120, motion: 'float-slow' },
+  { id: 'orb-2', top: '65%', left: '-12%', size: 360, hue: 'rgba(14,165,233,0.22)', blur: 150, motion: 'float-medium' },
+  { id: 'orb-3', top: '18%', left: '68%', size: 340, hue: 'rgba(236,72,153,0.28)', blur: 120, motion: 'float-delayed' },
+  { id: 'orb-4', top: '72%', left: '78%', size: 280, hue: 'rgba(129,140,248,0.24)', blur: 110, motion: 'float-slow' },
+  { id: 'orb-5', top: '82%', left: '42%', size: 380, hue: 'rgba(45,212,191,0.18)', blur: 140, motion: 'float-medium' },
+];
 
-const ParticleField = ({ count = 1800, radius = 6, animate }) => {
-  const groupRef = useRef(null);
-  const positions = useMemo(() => generatePositions(count, radius), [count, radius]);
-
-  useFrame((_, delta) => {
-    if (!animate || !groupRef.current) {
-      return;
-    }
-    groupRef.current.rotation.y += delta * 0.05;
-    groupRef.current.rotation.x += delta * 0.015;
-  });
-
-  return (
-    <group ref={groupRef} rotation={[0, 0, 0]}>
-      <Points positions={positions} stride={3} frustumCulled={false}>
-        <PointMaterial
-          transparent
-          color="#94a3ff"
-          size={0.045}
-          sizeAttenuation
-          depthWrite={false}
-          opacity={0.4}
-        />
-      </Points>
-    </group>
-  );
-};
+const createSparks = (count) =>
+  Array.from({ length: count }, (_, index) => ({
+    id: `spark-${index}`,
+    top: `${12 + Math.random() * 70}%`,
+    left: `${Math.random() * 100}%`,
+    size: 2 + Math.random() * 2.4,
+    opacity: 0.2 + Math.random() * 0.4,
+    duration: 14 + Math.random() * 10,
+    delay: Math.random() * 10,
+  }));
 
 const BackgroundParticles = () => {
   const reduceMotion = useReducedMotion();
+  const sparks = useMemo(() => createSparks(45), []);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <Canvas
-        camera={{ position: [0, 0, 9], fov: 55 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
-        frameloop={reduceMotion ? 'demand' : 'always'}
-      >
-        <ambientLight intensity={0.25} />
-        <ParticleField animate={!reduceMotion} />
-        <Preload all />
-      </Canvas>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.12),transparent_65%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/18 to-slate-950/55" />
+      <div className="absolute inset-0 bg-slate-950" />
+      <div className="absolute inset-x-0 top-[-35%] h-[140%] bg-aurora-gradient" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/30 to-slate-950/85" />
+      <div className="absolute inset-0 mix-blend-soft-light">
+        {BASE_ORBS.map((orb) => (
+          <span
+            key={orb.id}
+            className={`aurora-orb ${reduceMotion ? 'no-motion' : orb.motion}`}
+            style={{
+              top: orb.top,
+              left: orb.left,
+              width: orb.size,
+              height: orb.size,
+              background: orb.hue,
+              filter: `blur(${orb.blur}px)`
+            }}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,255,0.22),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(14,165,233,0.16),transparent_55%)]" />
+      </div>
+      <div className="absolute inset-0">
+        {sparks.map((spark) => (
+          <span
+            key={spark.id}
+            className={`aurora-spark ${reduceMotion ? 'no-motion' : 'spark-float'}`}
+            style={{
+              top: spark.top,
+              left: spark.left,
+              width: spark.size,
+              height: spark.size,
+              opacity: spark.opacity,
+              animationDuration: `${spark.duration}s`,
+              animationDelay: `${spark.delay}s`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,23,42,0.45),transparent_70%)]" />
+      <div className="absolute inset-0 bg-noise" />
     </div>
   );
 };

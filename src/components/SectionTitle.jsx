@@ -11,8 +11,8 @@ const SectionTitle = ({ eyebrow, title }) => (
     >
       {eyebrow}
     </motion.span>
-		<motion.h2
-			className="font-semibold leading-tight text-white text-[clamp(1.5rem,3.8vw,2.5rem)]"
+    <motion.h2
+      className="font-semibold leading-tight text-white text-[clamp(1.35rem,3.2vw,2.15rem)]"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}

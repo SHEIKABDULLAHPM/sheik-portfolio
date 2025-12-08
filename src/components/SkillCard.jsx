@@ -121,7 +121,7 @@ const SkillCard = ({
 
   return (
     <motion.div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/85 p-5 shadow-lg shadow-indigo-500/10 backdrop-blur-sm will-change-transform sm:p-6 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-white/12 bg-white/5 p-4 shadow-[0_18px_40px_rgba(2,6,23,0.45)] backdrop-blur-lg will-change-transform sm:p-5 ${
         hasDetails ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400/50' : ''
       }`}
       style={{ transition: 'border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
@@ -141,14 +141,14 @@ const SkillCard = ({
       aria-expanded={hasDetails ? isExpanded : undefined}
     >
       <div
-        className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 ${
+        className={`pointer-events-none absolute inset-0 rounded-[24px] bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 ${
           isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
         }`}
         style={{ transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
       />
       <div className="relative flex items-center justify-between gap-3">
         <motion.div
-          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl will-change-transform ${
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl will-change-transform ${
             isExpanded
               ? 'bg-indigo-500/30 text-white'
               : 'bg-indigo-500/10 text-indigo-300 group-hover:bg-indigo-500/20 group-hover:text-white'
@@ -157,7 +157,7 @@ const SkillCard = ({
           whileHover={{ rotate: isExpanded ? 0 : 3, scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
         >
-          {Icon ? <Icon size={22} /> : null}
+          {Icon ? <Icon size={20} /> : null}
         </motion.div>
         <p
           className={`flex-1 text-base font-semibold ${
@@ -215,7 +215,7 @@ const SkillCard = ({
             {isExpanded ? (
               <motion.ul
                 key="skill-details"
-                className="relative mt-3 flex flex-col gap-2.5 text-sm text-slate-300"
+                className="relative mt-3 flex flex-col gap-2 text-sm text-slate-300"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -226,7 +226,7 @@ const SkillCard = ({
                   return (
                     <motion.li
                       key={item.name}
-                      className="space-y-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 p-3 shadow-sm shadow-slate-900/30"
+                      className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm shadow-slate-900/25"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}

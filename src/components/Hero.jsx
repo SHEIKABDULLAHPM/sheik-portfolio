@@ -48,13 +48,13 @@ const Hero = () => {
         <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-indigo-200">
           Aspiring Software Developer
         </span>
-        <h1 className="font-bold leading-tight text-white text-[clamp(2rem,5vw,3.5rem)]">
+        <h1 className="font-bold leading-tight text-white text-[clamp(1.8rem,4.4vw,3.05rem)]">
           Peer Sheik Abdullah Mohd Noordeen
         </h1>
-        <p className="font-medium text-indigo-200 leading-snug text-[clamp(1rem,2.4vw,1.25rem)]">
+        <p className="font-medium text-indigo-200 leading-snug text-[clamp(0.9rem,2vw,1.15rem)]">
           3rd Year CSBS Engineering Student
         </p>
-        <p className="leading-relaxed text-slate-300 text-[clamp(0.95rem,1.9vw,1.125rem)]">
+        <p className="leading-relaxed text-slate-300 text-[clamp(0.9rem,1.6vw,1.05rem)]">
           I craft modern web experiences that blend clean design with purposeful problem-solving. I'm quick to embrace new tools, building responsive, accessible, and genuinely people-friendly interfaces with thoughtful engineering and an ever-curious mindset.
         </p>
         <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 lg:justify-start">

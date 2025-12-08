@@ -19,11 +19,19 @@ const PageHeader = ({ title, subtitle, description, align = 'left' }) => {
   return (
     <header className={containerClasses}>
       {subtitle ? (
-        <span className={`eyebrow tracking-[0.28em] ${isCentered ? 'justify-center text-center' : ''}`}>{subtitle}</span>
+        <span
+          className={`eyebrow text-xs tracking-[0.22em] ${isCentered ? 'justify-center text-center' : ''}`}
+        >
+          {subtitle}
+        </span>
       ) : null}
       <div className={copyWrapperClasses}>
-        <h1 className="text-[clamp(1.75rem,3.6vw,2.7rem)] leading-tight">{title}</h1>
-        {description ? <p className="text-sm text-slate-300 sm:text-base">{description}</p> : null}
+        <h1 className="text-[clamp(1.65rem,3vw,2.45rem)] font-semibold leading-tight text-white">
+          {title}
+        </h1>
+        {description ? (
+          <p className="text-[0.95rem] text-slate-300/90 sm:text-[1.05rem]">{description}</p>
+        ) : null}
       </div>
     </header>
   );

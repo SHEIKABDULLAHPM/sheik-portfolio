@@ -30,20 +30,20 @@ const BlogPage = () => {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       <PageHeader
         title="Writing & Notes"
         subtitle="Insights & Notes"
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {blogPosts.map((post) => (
-          <article key={post.id} className="flex h-full flex-col space-y-4 rounded-3xl border border-white/5 bg-slate-900/70 p-6 shadow-lg shadow-indigo-500/5">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-              <span className="text-sm text-slate-400">Published {post.publishedOn}</span>
+          <article key={post.id} className="surface-tight flex h-full flex-col gap-4">
+            <div className="space-y-1.5">
+              <h2 className="text-lg font-semibold text-white">{post.title}</h2>
+              <span className="text-xs uppercase tracking-[0.22em] text-indigo-200">Updated {post.publishedOn}</span>
             </div>
-            <p className="text-base text-slate-200">{post.preview}</p>
-            <div className="mt-auto flex flex-wrap gap-3 pt-2 text-sm">
+            <p className="text-sm text-slate-300/90 sm:text-base">{post.preview}</p>
+            <div className="mt-auto flex flex-wrap gap-2 pt-2 text-sm">
               {(() => {
                 const entry = reactions[post.id];
                 const isLiked = entry?.userReaction === 'like';
@@ -52,7 +52,7 @@ const BlogPage = () => {
                   <>
                     <button
                       type="button"
-                      className={`inline-flex items-center gap-2 rounded-2xl border px-4 py-2 transition-colors ${
+                      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 transition-colors ${
                         isLiked
                           ? 'border-emerald-400 bg-emerald-500/10 text-emerald-200'
                           : 'border-slate-700 bg-slate-900/60 text-slate-100 hover:border-emerald-400 hover:text-emerald-200'
@@ -63,7 +63,7 @@ const BlogPage = () => {
                     </button>
                     <button
                       type="button"
-                      className={`inline-flex items-center gap-2 rounded-2xl border px-4 py-2 transition-colors ${
+                      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 transition-colors ${
                         isDisliked
                           ? 'border-rose-400 bg-rose-500/10 text-rose-200'
                           : 'border-slate-700 bg-slate-900/60 text-slate-100 hover:border-rose-400 hover:text-rose-200'

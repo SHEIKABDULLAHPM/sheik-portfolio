@@ -120,22 +120,22 @@ const SkillsPage = () => {
 	};
 
 	return (
-		<div className="space-y-10">
+		<div className="space-y-10 sm:space-y-12">
 			<PageHeader
 				title="Skills & Domains"
 				subtitle="Core Competencies"
 				description="An interactive snapshot of the stacks, foundations, and soft skills I rely on day-to-day."
 			/>
-			<section className="surface space-y-3">
+			<section className="surface-tight space-y-3">
 				<div className="flex flex-wrap items-center justify-between gap-3">
-					<p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-300">Skill decks overview</p>
-					<span className="text-xs text-indigo-200">{pinnedIds.length} pinned</span>
+					<p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-slate-300">Skill decks overview</p>
+					<span className="text-[10px] font-semibold uppercase tracking-[0.26em] text-indigo-200">{pinnedIds.length} pinned</span>
 				</div>
-				<p className="text-sm text-slate-300">
-					Hover a card to preview proficiency percentages. Click the pin to keep favourites surfaced for quick reference.
+				<p className="text-sm text-slate-300 leading-relaxed">
+					Hover a card to peek at proficiency levels. Pin favourites to keep them surfaced for quick reference.
 				</p>
 			</section>
-			<div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
 				{orderedDecks.map((deck) => {
 					const Icon = iconMap[deck.id] ?? Code2;
 					const isPinned = pinnedIds.includes(deck.id);
