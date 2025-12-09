@@ -38,7 +38,8 @@ const SkillCard = ({
 }) => {
   const skillItems = items ?? [];
   const hasDetails = skillItems.length > 0;
-  const isExpanded = isPinned || expanded;
+  const isExpanded = Boolean(expanded);
+  const isHoverExpanded = isExpanded && !isPinned;
 
   const {
     chipBg = 'bg-indigo-500/15',
@@ -52,45 +53,35 @@ const SkillCard = ({
 
   const handleKeyDown = useCallback(
     (event) => {
-      if (!hasDetails) {
+      if (!hasDetails || (event.key !== 'Enter' && event.key !== ' ')) {
         return;
       }
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        if (onPinToggle) {
-          onPinToggle();
-        } else if (onHoverChange) {
-          onHoverChange(!isExpanded);
-        }
+      event.preventDefault();
+      if (onPinToggle) {
+        onPinToggle();
       }
     },
-    [hasDetails, isExpanded, onHoverChange, onPinToggle]
+    [hasDetails, onPinToggle]
   );
 
   const isHoverable = hasDetails;
   const helperText = isPinned
     ? 'Pinned · click to unpin'
-    : isExpanded
-      ? 'Hover away to hide'
-      : 'Click to pin or hover to preview';
+    : isHoverExpanded
+      ? 'Hovering · move away to hide'
+      : 'Hover to open · click pin to keep';
 
   const handleActivate = useCallback(
     (event) => {
-      if (!hasDetails) {
+      if (!hasDetails || !onPinToggle) {
         return;
       }
       if (event) {
         event.preventDefault();
       }
-      if (onPinToggle) {
-        onPinToggle();
-        return;
-      }
-      if (onHoverChange) {
-        onHoverChange(!isExpanded);
-      }
+      onPinToggle();
     },
-    [hasDetails, isExpanded, onHoverChange, onPinToggle]
+    [hasDetails, onPinToggle]
   );
 
   const handlePinToggle = useCallback(
@@ -119,6 +110,8 @@ const SkillCard = ({
     onHoverChange(false);
   }, [hasDetails, onHoverChange]);
 
+  const borderColor = isExpanded ? 'rgba(99, 102, 241, 0.4)' : 'rgba(71, 85, 105, 0.7)';
+
   return (
     <motion.div
       className={`group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-white/12 bg-white/5 p-4 shadow-[0_18px_40px_rgba(2,6,23,0.45)] backdrop-blur-lg will-change-transform sm:p-5 ${
@@ -126,7 +119,7 @@ const SkillCard = ({
       }`}
       style={{ transition: 'border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0, borderColor: isExpanded ? 'rgba(99, 102, 241, 0.4)' : 'rgba(71, 85, 105, 0.7)' }}
+      animate={{ opacity: 1, y: 0, borderColor }}
       whileHover={isHoverable ? { scale: 1.01, y: -4 } : {}}
       whileTap={isHoverable ? { scale: 0.985 } : {}}
       transition={{ type: 'spring', stiffness: 260, damping: 34, mass: 0.6 }}
@@ -185,7 +178,7 @@ const SkillCard = ({
         <>
           <motion.p
             className={`relative mt-2 text-[11px] font-semibold uppercase tracking-wide ${
-              isExpanded ? 'text-indigo-200/80' : 'text-indigo-200/70'
+              isPinned ? 'text-indigo-200/85' : isHoverExpanded ? 'text-indigo-200/80' : 'text-indigo-200/70'
             }`}
             style={{ transition: 'color 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
             initial={{ opacity: 0 }}

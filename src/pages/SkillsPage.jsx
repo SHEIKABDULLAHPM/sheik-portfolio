@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Brain, CircuitBoard, Code2, Coffee, Database, Globe, Users, Wrench } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
 import SkillCard from '../components/SkillCard.jsx';
@@ -91,14 +91,8 @@ const accentMap = {
 };
 
 const SkillsPage = () => {
-	const [pinnedIds, setPinnedIds] = useState(() => skillDecks.filter((deck) => deck.defaultPinned).map((deck) => deck.id));
+	const [pinnedIds, setPinnedIds] = useState([]);
 	const [hoveredId, setHoveredId] = useState(null);
-
-	const orderedDecks = useMemo(() => {
-		const pinnedDecks = skillDecks.filter((deck) => pinnedIds.includes(deck.id));
-		const unpinnedDecks = skillDecks.filter((deck) => !pinnedIds.includes(deck.id));
-		return [...pinnedDecks, ...unpinnedDecks];
-	}, [pinnedIds]);
 
 	const togglePin = (id) => {
 		setPinnedIds((prev) => {
@@ -136,16 +130,18 @@ const SkillsPage = () => {
 				</p>
 			</section>
 			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-				{orderedDecks.map((deck) => {
+				{skillDecks.map((deck) => {
 					const Icon = iconMap[deck.id] ?? Code2;
 					const isPinned = pinnedIds.includes(deck.id);
+					const isHovered = hoveredId === deck.id;
+					const isExpanded = isPinned || isHovered;
 					return (
 						<SkillCard
 							key={deck.id}
 							title={deck.title}
 							icon={Icon}
 							items={deck.items}
-							expanded={hoveredId === deck.id}
+							expanded={isExpanded}
 							onHoverChange={(isHovering) => setHoverState(deck.id, isHovering)}
 							isPinned={isPinned}
 							onPinToggle={() => togglePin(deck.id)}
