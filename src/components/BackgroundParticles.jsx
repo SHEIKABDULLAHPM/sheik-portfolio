@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
 const BASE_ORBS = [
@@ -22,50 +22,64 @@ const createSparks = (count) =>
 
 const BackgroundParticles = () => {
   const reduceMotion = useReducedMotion();
-  const sparks = useMemo(() => createSparks(45), []);
+  const [ready, setReady] = useState(false);
+  const sparks = useMemo(() => createSparks(28), []);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setReady(false);
+      return undefined;
+    }
+    let frame = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(frame);
+  }, [reduceMotion]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-slate-950" />
       <div className="absolute inset-x-0 top-[-35%] h-[140%] bg-aurora-gradient" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/30 to-slate-950/85" />
-      <div className="absolute inset-0 mix-blend-soft-light">
-        {BASE_ORBS.map((orb) => (
-          <span
-            key={orb.id}
-            className={`aurora-orb ${reduceMotion ? 'no-motion' : orb.motion}`}
-            style={{
-              top: orb.top,
-              left: orb.left,
-              width: orb.size,
-              height: orb.size,
-              background: orb.hue,
-              filter: `blur(${orb.blur}px)`
-            }}
-          />
-        ))}
-      </div>
+      {ready ? (
+        <div className="absolute inset-0 mix-blend-soft-light">
+          {BASE_ORBS.map((orb) => (
+            <span
+              key={orb.id}
+              className={`aurora-orb ${reduceMotion ? 'no-motion' : orb.motion}`}
+              style={{
+                top: orb.top,
+                left: orb.left,
+                width: orb.size,
+                height: orb.size,
+                background: orb.hue,
+                filter: `blur(${orb.blur}px)`
+              }}
+            />
+          ))}
+        </div>
+      ) : null}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,255,0.22),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(14,165,233,0.16),transparent_55%)]" />
       </div>
-      <div className="absolute inset-0">
-        {sparks.map((spark) => (
-          <span
-            key={spark.id}
-            className={`aurora-spark ${reduceMotion ? 'no-motion' : 'spark-float'}`}
-            style={{
-              top: spark.top,
-              left: spark.left,
-              width: spark.size,
-              height: spark.size,
-              opacity: spark.opacity,
-              animationDuration: `${spark.duration}s`,
-              animationDelay: `${spark.delay}s`,
-            }}
-          />
-        ))}
-      </div>
+      {ready ? (
+        <div className="absolute inset-0">
+          {sparks.map((spark) => (
+            <span
+              key={spark.id}
+              className={`aurora-spark ${reduceMotion ? 'no-motion' : 'spark-float'}`}
+              style={{
+                top: spark.top,
+                left: spark.left,
+                width: spark.size,
+                height: spark.size,
+                opacity: spark.opacity,
+                animationDuration: `${spark.duration}s`,
+                animationDelay: `${spark.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+      ) : null}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,23,42,0.45),transparent_70%)]" />
       <div className="absolute inset-0 bg-noise" />
     </div>

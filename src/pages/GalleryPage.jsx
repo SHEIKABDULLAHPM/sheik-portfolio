@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { gallery } from '../data/siteContent.js';
+import { gallery } from '../data/gallery.js';
 
 const getItemsPerPage = () => {
   if (typeof window === 'undefined') {

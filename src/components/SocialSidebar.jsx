@@ -3,50 +3,30 @@ import gmailIcon from '../assets/logo/gmail.png';
 import whatsappIcon from '../assets/logo/whatsapp.png';
 import instagramIcon from '../assets/logo/insta.png';
 import facebookIcon from '../assets/logo/facebook.png';
-import leetcodeIcon from '../assets/logo/leetcode.png';
-import hackerrankIcon from '../assets/logo/hackerrank.png';
-import githubIcon from '../assets/logo/github.png';
-import { contactInfo } from '../data/siteContent.js';
+import { getSocialLinks } from '../data/contact.js';
 
-const whatsappDigits = contactInfo.phone.replace(/[^0-9]/g, '');
+const iconMap = {
+	linkedin: linkedinIcon,
+	mail: gmailIcon,
+	instagram: instagramIcon,
+	facebook: facebookIcon,
+	whatsapp: whatsappIcon,
+};
 
 const sidebarLinks = [
-  {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/peer-sheik-abdullah-mohd-noordeen-b97148276/',
-    icon: linkedinIcon,
-    newTab: true,
-  },
-  {
-    id: 'gmail',
-    label: 'Gmail',
-    url: `mailto:${contactInfo.email}`,
-    icon: gmailIcon,
-  },
-  {
-    id: 'whatsapp',
-    label: 'WhatsApp',
-    url: whatsappDigits ? `https://wa.me/${whatsappDigits}` : undefined,
-    icon: whatsappIcon,
-    newTab: true,
-  },
-  {
-    id: 'instagram',
-    label: 'Instagram',
-    url: 'https://www.instagram.com/unary_man/',
-    icon: instagramIcon,
-    newTab: true,
-  },
-  {
-    id: 'facebook',
-    label: 'Facebook',
-    url: 'https://www.facebook.com/profile.php?id=100067640333725',
-    icon: facebookIcon,
-    newTab: true,
-  },
-  
-].filter((item) => Boolean(item.url));
+  ...getSocialLinks('social'),
+  ...getSocialLinks('messaging'),
+  ...getSocialLinks('direct'),
+]
+  .filter((link) => Boolean(link?.url))
+  .filter((link, index, array) => array.findIndex((item) => item.id === link.id) === index)
+  .map((link) => ({
+    ...link,
+    icon: iconMap[link.type] ?? linkedinIcon,
+    newTab: link.type !== 'mail',
+    label: link.platform ?? link.ariaLabel ?? link.id,
+    ariaLabel: link.ariaLabel ?? link.platform ?? link.id,
+  }));
 
 const SocialSidebar = () => (
   <aside className="pointer-events-none fixed right-2 top-1/2 z-40 hidden -translate-y-1/2 flex-col sm:right-4 lg:right-8 xl:right-12 2xl:right-20 lg:flex">
@@ -57,8 +37,8 @@ const SocialSidebar = () => (
           href={link.url}
           target={link.newTab ? '_blank' : undefined}
           rel={link.newTab ? 'noopener noreferrer' : undefined}
-          className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/15 bg-white/5 transition hover:border-indigo-400"
-          aria-label={link.label}
+          className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/40 bg-gradient-to-b from-white to-slate-100 shadow-lg shadow-slate-900/40 transition hover:border-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+          aria-label={link.ariaLabel}
         >
           <img src={link.icon} alt={`${link.label} logo`} className="h-5 w-5 object-contain" loading="lazy" />
           <span className="sr-only">{link.label}</span>

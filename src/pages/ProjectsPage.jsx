@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { projects } from '../data/siteContent.js';
+import { projects } from '../data/projects.js';
 
 const ProjectsPage = () => {
 	const categoryFilters = useMemo(
@@ -69,7 +69,7 @@ const ProjectsPage = () => {
 								key={category}
 								type="button"
 								onClick={() => setActiveCategory(category)}
-								className={`rounded-full border px-4 py-2 text-[0.75rem] font-medium uppercase tracking-wide transition ${
+								className={`rounded-full border px-4 py-2 text-[0.75rem] font-medium uppercase tracking-wide transition text-center leading-tight whitespace-normal break-words ${
 									isActive ? 'border-white/30 bg-white/10 text-white' : 'border-white/15 text-slate-200 hover:border-white/30'
 								}`}
 							>

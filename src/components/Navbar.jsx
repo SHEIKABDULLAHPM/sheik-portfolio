@@ -143,14 +143,14 @@ const Navbar = () => {
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   <NavLink
                     to="/resume"
-                    className="rounded-2xl border border-white/15 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+                    className="rounded-2xl border border-white/15 px-4 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-white leading-tight whitespace-normal"
                     onClick={() => setOpen(false)}
                   >
                     Resume
                   </NavLink>
                   <Link
                     to="/contact"
-                    className="rounded-2xl bg-indigo-500 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+                    className="rounded-2xl bg-indigo-500 px-4 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-white leading-tight whitespace-normal"
                     onClick={() => setOpen(false)}
                   >
                     Let&apos;s talk

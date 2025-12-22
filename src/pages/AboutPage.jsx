@@ -1,5 +1,5 @@
 import PageHeader from '../components/PageHeader.jsx';
-import { aboutMe } from '../data/siteContent.js';
+import { aboutMe } from '../data/hero.js';
 
 const AboutPage = () => (
   <div className="space-y-12">

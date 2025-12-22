@@ -6,67 +6,77 @@ import hackerrankIcon from '../assets/logo/hackerrank.png';
 import instagramIcon from '../assets/logo/insta.png';
 import leetcodeIcon from '../assets/logo/leetcode.png';
 import linkedinIcon from '../assets/logo/linkedin.png';
-import { profile, contactInfo } from '../data/siteContent.js';
 import gmailIcon from '../assets/logo/gmail.png';
+import whatsappIcon from '../assets/logo/whatsapp.png';
+import facebookIcon from '../assets/logo/facebook.png';
+import { profile } from '../data/hero.js';
+import { contactInfo, getSocialLinks } from '../data/contact.js';
 const roles = ['Java Backend Developer', 'Spring Boot & Microservices', 'DSA Problem Solver', 'ML & AI Enthusiast'];
 
 const heroSkills = ['Java', 'Spring Boot', 'Microservices', 'DSA', 'ML & AI'];
 
 const infoTiles = [
-  { label: 'Location', value: 'Pallapatti, Tamil Nadu', icon: MapPin },
+  { label: 'Location', value: contactInfo.location, icon: MapPin },
   { label: 'Expertise', value: 'AI/ML, Problem Solving', icon: Cpu },
-  { label: 'Primary Contact', value: 'sheikabdullahpeer@gmail.com', icon: Mail, href: 'mailto:sheikabdullahpeer@gmail.com' },
+  { label: 'Primary Contact', value: contactInfo.email, icon: Mail, href: `mailto:${contactInfo.email}` },
 ];
 
-const contactSocialMap = contactInfo.socials.reduce((acc, social) => {
-  acc[social.type] = social.url;
-  return acc;
-}, {});
-const socialLinks = [
-  {
-    id: 'linkedin',
-    url: contactSocialMap.linkedin,
-    image: linkedinIcon,
-    label: 'LinkedIn',
-    external: true,
-  },
-  {
-    id: 'email',
-    url: contactSocialMap.mail ?? `mailto:${contactInfo.email}`,
-    image: gmailIcon,
-    icon: Mail,
-    label: 'Email',
-  },
-  {
-    id: 'instagram',
-    url: 'https://www.instagram.com/unary_man/',
-    image: instagramIcon,
-    label: 'Instagram',
-    external: true,
-  },
-].filter((link) => Boolean(link.url));
+const socialBuckets = [
+  ...getSocialLinks('direct'),
+  ...getSocialLinks('messaging'),
+  ...getSocialLinks('social'),
+].filter((link) => Boolean(link?.url));
+
+const socialOrder = new Map();
+const dedupedSocialLinks = socialBuckets.filter((link) => {
+  if (!link?.id || socialOrder.has(link.id)) {
+    return false;
+  }
+  socialOrder.set(link.id, socialOrder.size);
+  return true;
+});
+
+const iconDirectory = {
+  linkedin: linkedinIcon,
+  instagram: instagramIcon,
+  mail: gmailIcon,
+  whatsapp: whatsappIcon,
+  facebook: facebookIcon,
+};
+
+const getFallbackBadge = (label) => (label ? label.charAt(0).toUpperCase() : '?');
+
+const priorityValue = (link) => {
+  if (link.type === 'mail') {
+    return -2;
+  }
+  if (link.type === 'whatsapp') {
+    return -1;
+  }
+  return socialOrder.get(link.id) ?? Number.MAX_SAFE_INTEGER;
+};
+
+const socialLinks = [...dedupedSocialLinks]
+  .sort((a, b) => priorityValue(a) - priorityValue(b))
+  .map((link) => ({
+    ...link,
+    label: link.platform ?? link.ariaLabel ?? link.id,
+    image: iconDirectory[link.type],
+    external: link.type !== 'mail',
+  }));
 const socialLinksLabel = socialLinks.map((link) => link.label).join(' · ');
 
-const workspaceLinks = [
-  {
-    id: 'github',
-    url: 'https://github.com/SHEIKABDULLAHPM',
-    image: githubIcon,
-    label: 'GitHub',
-  },
-  {
-    id: 'leetcode',
-    url: 'https://leetcode.com/u/T5dGt4g82v/',
-    image: leetcodeIcon,
-    label: 'LeetCode',
-  },
-  {
-    id: 'hackerrank',
-    url: 'https://www.hackerrank.com/profile/Peer_Master',
-    image: hackerrankIcon,
-    label: 'HackerRank',
-  },
-];
+const workspaceLinks = getSocialLinks('workspace').map((link) => ({
+	...link,
+	image:
+		link.type === 'github'
+			? githubIcon
+			: link.type === 'leetcode'
+			?	leetcodeIcon
+			: link.type === 'hackerrank'
+			?	hackerrankIcon
+			: githubIcon,
+}));
 const workspaceLinksLabel = workspaceLinks.map((link) => link.label).join(' · ');
 
 const HomePage = () => {
@@ -213,31 +223,30 @@ const HomePage = () => {
             <p className="text-xs text-slate-400">{socialLinksLabel}</p>
           </div>
           <div className="mt-3 flex flex-wrap gap-3">
-            {socialLinks.map((link) => {
-              const IconComponent = link.icon;
-              return (
-                <a
-                  key={link.id}
-                  href={link.url}
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/15 bg-white/5 text-white transition hover:border-indigo-300 sm:h-14 sm:w-14"
-                  aria-label={link.label}
-                >
-                  {link.image ? (
-                    <img
-                      src={link.image}
-                      alt={`${link.label} logo`}
-                      className="h-7 w-7 object-contain sm:h-8 sm:w-8"
-                      loading="lazy"
-                    />
-                  ) : (
-                    IconComponent && <IconComponent className="h-6 w-6 sm:h-7 sm:w-7" />
-                  )}
-                  <span className="sr-only">{link.label}</span>
-                </a>
-              );
-            })}
+            {socialLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+                className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/15 bg-white/5 text-white transition hover:border-indigo-300 sm:h-14 sm:w-14"
+                aria-label={link.label}
+              >
+                {link.image ? (
+                  <img
+                    src={link.image}
+                    alt={`${link.label} logo`}
+                    className="h-7 w-7 object-contain sm:h-8 sm:w-8"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="text-sm font-semibold text-indigo-200 sm:text-base">
+                    {getFallbackBadge(link.label)}
+                  </span>
+                )}
+                <span className="sr-only">{link.label}</span>
+              </a>
+            ))}
           </div>
         </div>
         <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10 sm:p-5">

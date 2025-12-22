@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Download, Eye, Info } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { resumeDetails } from '../data/siteContent.js';
-import resumePdf from '../assets/sheik resume.pdf';
+import { resumeDetails } from '../data/resume.js';
+import resumePdf from '../assets/sheik-resume.pdf';
 
 const ResumePage = () => {
   const [showPreview, setShowPreview] = useState(false);

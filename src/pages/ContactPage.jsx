@@ -1,13 +1,20 @@
-import { Github, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
+import { Code2, Facebook, Github, Globe2, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Twitter } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { contactInfo } from '../data/siteContent.js';
+import { contactInfo } from '../data/contact.js';
 
 const iconMap = {
   github: Github,
   linkedin: Linkedin,
   twitter: Twitter,
   mail: Mail,
+  instagram: Instagram,
+  facebook: Facebook,
+  whatsapp: MessageCircle,
+  leetcode: Code2,
+  hackerrank: Code2,
 };
+
+const resolveIcon = (type) => iconMap[type] ?? Globe2;
 
 const ContactPage = () => (
   <div className="space-y-12">
@@ -37,17 +44,21 @@ const ContactPage = () => (
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">Socials</p>
       <div className="grid gap-3 sm:grid-cols-2">
         {contactInfo.socials.map((social) => {
-          const Icon = iconMap[social.type] ?? Mail;
+          const Icon = resolveIcon(social.type);
+          const isDirect = social.type === 'mail';
+          const accessibleLabel = social.ariaLabel ?? social.platform;
           return (
             <a
-              key={social.label}
+              key={social.id}
               href={social.url}
-              target={social.type === 'mail' ? undefined : '_blank'}
-              rel={social.type === 'mail' ? undefined : 'noopener noreferrer'}
+              target={isDirect ? undefined : '_blank'}
+              rel={isDirect ? undefined : 'noopener noreferrer'}
               className="flex items-center gap-3 rounded-2xl border border-white/12 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-indigo-400"
+              aria-label={accessibleLabel}
+              title={social.platform}
             >
               <Icon size={18} />
-              {social.label}
+              <span>{social.platform}</span>
             </a>
           );
         })}

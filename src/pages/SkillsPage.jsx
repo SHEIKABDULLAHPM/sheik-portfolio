@@ -1,8 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Brain, CircuitBoard, Code2, Coffee, Database, Globe, Users, Wrench } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
 import SkillCard from '../components/SkillCard.jsx';
-import { skillDecks } from '../data/siteContent.js';
+import { skillDecks } from '../data/skills.js';
+
+const PINNED_STORAGE_KEY = 'portfolio:pinned-skills';
+
+const deriveDefaultPinnedIds = () => skillDecks.filter((deck) => deck.defaultPinned).map((deck) => deck.id);
+
+const sanitizePinnedIds = (ids) => {
+	if (!Array.isArray(ids)) {
+		return null;
+	}
+	const validIds = ids.filter((id) => skillDecks.some((deck) => deck.id === id));
+	return validIds;
+};
+
+const getStoredPinnedIds = () => {
+	if (typeof window === 'undefined') {
+		return null;
+	}
+	try {
+		const raw = window.localStorage.getItem(PINNED_STORAGE_KEY);
+		if (!raw) {
+			return null;
+		}
+		const parsed = JSON.parse(raw);
+		return sanitizePinnedIds(parsed);
+	} catch (error) {
+		console.warn('Failed to parse pinned skills from storage:', error);
+		return null;
+	}
+};
 
 const iconMap = {
 	'programming-languages': Code2,
@@ -91,8 +120,35 @@ const accentMap = {
 };
 
 const SkillsPage = () => {
-	const [pinnedIds, setPinnedIds] = useState([]);
+	const [pinnedIds, setPinnedIds] = useState(() => {
+		const stored = getStoredPinnedIds();
+		if (stored !== null) {
+			return stored;
+		}
+		return deriveDefaultPinnedIds();
+	});
 	const [hoveredId, setHoveredId] = useState(null);
+
+	useEffect(() => {
+		const stored = getStoredPinnedIds();
+		if (stored) {
+			setPinnedIds((prev) => {
+				if (JSON.stringify(prev) === JSON.stringify(stored)) {
+					return prev;
+				}
+				return stored;
+			});
+			return;
+		}
+		setPinnedIds(deriveDefaultPinnedIds());
+	}, []);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+		window.localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(pinnedIds));
+	}, [pinnedIds]);
 
 	const togglePin = (id) => {
 		setPinnedIds((prev) => {

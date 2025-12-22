@@ -1,6 +1,6 @@
 import { Briefcase } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { internships } from '../data/siteContent.js';
+import { internships } from '../data/internships.js';
 
 const InternshipPage = () => (
   <div className="space-y-12">

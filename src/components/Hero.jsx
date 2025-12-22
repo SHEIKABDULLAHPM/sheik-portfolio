@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import heroPortrait from '../assets/sheik-abdullah.jpg';
-import resumePdf from '../assets/sheik resume.pdf';
+import resumePdf from '../assets/sheik-resume.pdf';
 const heroVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
@@ -45,7 +45,7 @@ const Hero = () => {
         transition={heroTransition}
         variants={heroVariants}
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-indigo-200">
+        <span className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-indigo-200 sm:text-xs sm:tracking-[0.28em]">
           Aspiring Software Developer
         </span>
         <h1 className="font-bold leading-tight text-white text-[clamp(1.8rem,4.4vw,3.05rem)]">

@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
-import { certificates } from '../data/siteContent.js';
+import { certificates } from '../data/certificates.js';
 
-const FILTER_OPTIONS = ['Courses', 'Other'];
+const FILTER_OPTIONS = ['All', 'Courses', 'Other'];
 
 const CertificatesPage = () => {
-	const [activeFilter, setActiveFilter] = useState('Courses');
+	const [activeFilter, setActiveFilter] = useState('All');
 
 	const filteredCertificates = useMemo(() => {
 		if (activeFilter === 'All') {
@@ -58,7 +58,7 @@ const CertificatesPage = () => {
 								type="button"
 								onClick={() => setActiveFilter(option)}
 								aria-pressed={isActive}
-								className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition ${
+								className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition text-center leading-tight whitespace-normal break-words ${
 									isActive
 										? 'border-white/40 bg-white/15 text-white'
 										: 'border-white/15 bg-white/5 text-slate-300 hover:border-indigo-300 hover:text-white'
