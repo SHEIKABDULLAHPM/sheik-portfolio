@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteImagemin from 'vite-plugin-imagemin';
 
+const GITHUB_PAGES_BASE = '/sheik-portfolio/';
+
 const createImageminPlugin = () =>
   viteImagemin({
     gifsicle: { optimizationLevel: 3 },
@@ -16,7 +18,11 @@ const createImageminPlugin = () =>
     },
   });
 
-export default defineConfig(({ command }) => ({
-  base: '/',
-  plugins: [react(), ...(command === 'build' ? [createImageminPlugin()] : [])],
-}));
+export default defineConfig(({ command, mode }) => {
+  const isProductionBuild = command === 'build' || mode === 'production';
+
+  return {
+    base: isProductionBuild ? GITHUB_PAGES_BASE : '/',
+    plugins: [react(), ...(command === 'build' ? [createImageminPlugin()] : [])],
+  };
+});
