@@ -87,12 +87,13 @@ const BlogPage = () => {
   }, []);
 
   return (
-    <div className="space-y-12">
-      <PageHeader
-        title="Writing & Notes"
-        subtitle="Insights & Notes"
-      />
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <div className="page-shell">
+      <div className="page-stack">
+        <PageHeader
+          title="Writing & Notes"
+          subtitle="Insights & Notes"
+        />
+      <div className="page-grid page-grid--3">
         {blogPosts.map((post) => (
           <article key={post.id} className="surface-tight flex h-full flex-col gap-4">
             <div className="space-y-1.5">
@@ -151,6 +152,7 @@ const BlogPage = () => {
             </div>
           </article>
         ))}
+      </div>
       </div>
     </div>
   );

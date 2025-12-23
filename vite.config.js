@@ -1,0 +1,22 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import viteImagemin from 'vite-plugin-imagemin';
+
+const createImageminPlugin = () =>
+  viteImagemin({
+    gifsicle: { optimizationLevel: 3 },
+    optipng: { optimizationLevel: 5 },
+    mozjpeg: { quality: 80 },
+    pngquant: { quality: [0.65, 0.85], speed: 3 },
+    svgo: {
+      plugins: [
+        { name: 'removeViewBox', active: false },
+        { name: 'removeEmptyAttrs', active: true },
+      ],
+    },
+  });
+
+export default defineConfig(({ command }) => ({
+  base: '/',
+  plugins: [react(), ...(command === 'build' ? [createImageminPlugin()] : [])],
+}));

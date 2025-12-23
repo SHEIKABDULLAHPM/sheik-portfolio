@@ -150,9 +150,10 @@ const HomePage = () => {
   }, [displayedRole, isDeleting, isTabVisible, roleIndex, shouldAnimate]);
 
   return (
+  <div className="page-shell">
     <div className="page-stack">
-      <section className="grid items-center gap-6 md:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)]">
-        <div className="space-y-5 animate-soft-slide">
+        <section className="grid items-center gap-6 md:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)]">
+          <div className="space-y-5 animate-soft-slide">
           <div className="space-y-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-indigo-200">
               <span className="h-2 w-2 rounded-full bg-indigo-400" />
@@ -216,7 +217,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="page-grid page-grid--2">
         <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10 sm:p-5">
           <div className="flex flex-col gap-1">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-sm">Social Links</p>
@@ -271,6 +272,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,8 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './components/AppLayout.jsx';
 import RouteFallback from './components/RouteFallback.jsx';
-import LoadingScreen from './components/LoadingScreen';
+import LoadingScreen from './components/LoadingScreen.jsx';
+import RouteLoader from './components/RouteLoader.jsx';
 
 const AboutPage = lazy(() => import('./pages/AboutPage.jsx'));
 const BlogPage = lazy(() => import('./pages/BlogPage.jsx'));
@@ -32,7 +33,7 @@ const App = () => {
         autoClose={false}
         overlayClassName="bg-[#05060a]"
       />
-      <Suspense fallback={null}>
+      <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />

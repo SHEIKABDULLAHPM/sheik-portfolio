@@ -5,6 +5,7 @@ import Footer from './Footer.jsx';
 import BackgroundParticles from './BackgroundParticles.jsx';
 import ScrollManager from './ScrollManager.jsx';
 import SocialSidebar from './SocialSidebar.jsx';
+import RouteMetadataHandler from './RouteMetadataHandler.jsx';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -19,13 +20,17 @@ const AppLayout = () => {
 
   return (
     <div className="relative min-h-screen bg-[#010511] text-slate-100 antialiased">
+      <RouteMetadataHandler />
       <ScrollManager />
       <BackgroundParticles />
       <SocialSidebar />
       <div className="relative flex min-h-screen flex-col">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Navbar />
-        <main id="main-content" role="main" tabIndex={-1} className="flex-1">
-          <div className="content-shell pb-16 pt-24 sm:pb-24 sm:pt-28 lg:pb-28 lg:pt-36">
+        <main id="main-content" role="main" tabIndex={-1} className="app-main flex-1">
+          <div className="content-shell layout-shell page-content">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={location.pathname}

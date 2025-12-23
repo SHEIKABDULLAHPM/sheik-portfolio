@@ -50,10 +50,11 @@ const ProjectsPage = () => {
 	};
 
 	return (
-		<div className="space-y-8 lg:space-y-10">
-			<PageHeader
-				title="Projects & Experiments"
-				subtitle="Case Studies"
+		<div className="page-shell">
+			<div className="page-stack">
+				<PageHeader
+					title="Projects & Experiments"
+					subtitle="Case Studies"
 				description="A curated log of tools, dashboards, and research experiments that shaped my craft."
 			/>
 			<section className="surface space-y-4 sm:space-y-5">
@@ -79,7 +80,7 @@ const ProjectsPage = () => {
 					})}
 				</div>
 			</section>
-			<div className="grid gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+			<div className="page-grid page-grid--3">
 				{filteredProjects.length === 0 ? (
 					<p className="surface text-sm text-slate-400">
 						No projects match “{activeCategory}”. Try another filter.
@@ -135,7 +136,8 @@ const ProjectsPage = () => {
 				)}
 			</div>
 		</div>
-	);
+	</div>
+);
 };
 
 export default ProjectsPage;

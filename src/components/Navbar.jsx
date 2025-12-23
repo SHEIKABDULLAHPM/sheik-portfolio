@@ -90,7 +90,7 @@ const Navbar = () => {
           : 'bg-slate-950/40 backdrop-blur-md'
       }`}
     >
-      <nav aria-label="Primary" className="content-shell flex flex-wrap items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
+      <nav aria-label="Primary" className="content-shell layout-shell flex flex-wrap items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
         <Link to="/" className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
           Sheik<span className="text-indigo-300"> .</span>
         </Link>

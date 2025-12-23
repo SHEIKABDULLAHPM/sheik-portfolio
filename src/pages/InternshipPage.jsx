@@ -3,11 +3,12 @@ import PageHeader from '../components/PageHeader.jsx';
 import { internships } from '../data/internships.js';
 
 const InternshipPage = () => (
-  <div className="space-y-12">
-    <PageHeader
-      title="Internship Experience"
-      subtitle="Industry Experience"
-    />
+  <div className="page-shell">
+    <div className="page-stack">
+      <PageHeader
+        title="Internship Experience"
+        subtitle="Industry Experience"
+      />
     <div className="space-y-6">
       {internships.map((item) => (
         <article key={item.id} className="surface space-y-6">
@@ -47,6 +48,7 @@ const InternshipPage = () => (
           </div>
         </article>
       ))}
+    </div>
     </div>
   </div>
 );

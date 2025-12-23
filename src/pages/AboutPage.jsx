@@ -2,11 +2,12 @@ import PageHeader from '../components/PageHeader.jsx';
 import { aboutMe } from '../data/hero.js';
 
 const AboutPage = () => (
-  <div className="space-y-12">
-    <PageHeader
-      title="About Me"
-      subtitle="Professional Background"
-    />
+  <div className="page-shell">
+    <div className="page-stack">
+      <PageHeader
+        title="About Me"
+        subtitle="Professional Background"
+      />
     <section className="surface space-y-4">
       <div className="space-y-4 text-base text-slate-200">
         {aboutMe.introduction.map((paragraph, index) => (
@@ -63,6 +64,7 @@ const AboutPage = () => (
         </ul>
       </section>
     )}
+    </div>
   </div>
 );
 

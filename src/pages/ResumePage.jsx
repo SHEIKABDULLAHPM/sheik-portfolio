@@ -8,11 +8,12 @@ const ResumePage = () => {
   const [showPreview, setShowPreview] = useState(false);
 
   return (
-    <div className="space-y-12">
-      <PageHeader
-        title="Resume"
-        subtitle="Career Snapshot"
-      />
+    <div className="page-shell">
+      <div className="page-stack">
+        <PageHeader
+          title="Resume"
+          subtitle="Career Snapshot"
+        />
 
       <div className="flex flex-wrap gap-3">
         <a
@@ -32,6 +33,18 @@ const ResumePage = () => {
       </div>
 
       <section className="surface space-y-4">
+        {showPreview ? (
+        <div className="surface p-4">
+          <div className="aspect-[8.5/11] w-full overflow-hidden rounded-2xl border border-slate-800">
+            <iframe 
+              title="Resume preview" 
+              src={resumePdf} 
+              className="h-full w-full" 
+              type="application/pdf"
+            />
+          </div>
+        </div>
+      ) : null}
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">
           <Info size={16} /> Summary
         </div>
@@ -101,18 +114,8 @@ const ResumePage = () => {
         </div>
       </section>
 
-      {showPreview ? (
-        <div className="surface p-4">
-          <div className="aspect-[8.5/11] w-full overflow-hidden rounded-2xl border border-slate-800">
-            <iframe 
-              title="Resume preview" 
-              src={resumePdf} 
-              className="h-full w-full" 
-              type="application/pdf"
-            />
-          </div>
-        </div>
-      ) : null}
+      
+      </div>
     </div>
   );
 };

@@ -103,7 +103,8 @@ const GalleryPage = () => {
   };
 
   return (
-    <div className="space-y-10 sm:space-y-12">
+    <div className="page-shell">
+      <div className="page-stack">
       <PageHeader
         title="Gallery"
         subtitle="Visual Highlights"
@@ -193,6 +194,7 @@ const GalleryPage = () => {
       {visibleSections.length === 0 ? (
         <p className="surface text-sm text-slate-400">No gallery items match this filter.</p>
       ) : null}
+      </div>
     </div>
   );
 };

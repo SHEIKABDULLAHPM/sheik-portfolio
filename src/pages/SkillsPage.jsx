@@ -170,7 +170,8 @@ const SkillsPage = () => {
 	};
 
 	return (
-		<div className="space-y-10 sm:space-y-12">
+		<div className="page-shell">
+			<div className="page-stack">
 			<PageHeader
 				title="Skills & Domains"
 				subtitle="Core Competencies"
@@ -185,7 +186,7 @@ const SkillsPage = () => {
 					Hover a card to peek at proficiency levels. Pin favourites to keep them surfaced for quick reference.
 				</p>
 			</section>
-			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+			<div className="page-grid page-grid--3">
 				{skillDecks.map((deck) => {
 					const Icon = iconMap[deck.id] ?? Code2;
 					const isPinned = pinnedIds.includes(deck.id);
@@ -207,7 +208,8 @@ const SkillsPage = () => {
 				})}
 			</div>
 		</div>
-	);
+	</div>
+);
 };
 
 export default SkillsPage;

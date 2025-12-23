@@ -17,12 +17,13 @@ const iconMap = {
 const resolveIcon = (type) => iconMap[type] ?? Globe2;
 
 const ContactPage = () => (
-  <div className="space-y-12">
-    <PageHeader
-      title="Contact"
-      subtitle="Professional Channels"
-    />
-    <section className="surface grid gap-4 md:grid-cols-3">
+  <div className="page-shell">
+    <div className="page-stack">
+      <PageHeader
+        title="Contact"
+        subtitle="Professional Channels"
+      />
+    <section className="surface page-grid page-grid--3">
       <div className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">Email</p>
         <a href={`mailto:${contactInfo.email}`} className="text-base font-semibold text-white">
@@ -40,7 +41,7 @@ const ContactPage = () => (
         </p>
       </div>
     </section>
-    <section className="surface space-y-3">
+    <section className="surface page-section">
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">Socials</p>
       <div className="grid gap-3 sm:grid-cols-2">
         {contactInfo.socials.map((social) => {
@@ -64,7 +65,7 @@ const ContactPage = () => (
         })}
       </div>
     </section>
-    <section className="surface space-y-3">
+    <section className="surface page-section">
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">Need a response fast?</p>
       <p className="text-sm text-slate-200 sm:text-[0.95rem]">
         Email with a hint of context and timelines is the quickest route to a reply. I usually respond within one business day.
@@ -74,6 +75,7 @@ const ContactPage = () => (
         <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2"><Phone size={14} /> Phone</span>
       </div>
     </section>
+    </div>
   </div>
 );
 
