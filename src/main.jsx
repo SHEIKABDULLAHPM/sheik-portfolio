@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';  // Changed from BrowserRouter
 import App from './App';
 import './index.css';
 
@@ -12,8 +12,8 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>  {/* Changed from BrowserRouter */}
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 );

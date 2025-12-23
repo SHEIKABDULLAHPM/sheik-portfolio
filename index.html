@@ -1,19 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/sa-mark.svg" />
-
+    <link rel="icon" type="image/svg+xml" href="/sa-mark. svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-default>Peer Sheik Abdullah · Portfolio</title>
     <meta name="description" content="Modern portfolio for Peer Sheik Abdullah — showcasing product-focused engineering work, case studies, and ways to collaborate." />
-    <meta property="og:title" content="Peer Sheik Abdullah · Product-Focused Engineer" />
+    <meta property="og: title" content="Peer Sheik Abdullah · Product-Focused Engineer" />
     <meta property="og:description" content="Browse projects, certifications, and experience across AI, frontend, and data storytelling." />
     <meta property="og:image" content="/sa-mark.svg" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Peer Sheik Abdullah · Product-Focused Engineer" />
-    <meta name="twitter:description" content="A cohesive view of my projects, tools, and internship experience." />
+    <meta name="twitter: description" content="A cohesive view of my projects, tools, and internship experience." />
     <meta name="twitter:image" content="/sa-mark.svg" />
+    <script>
+      // Handle redirect from 404.html
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect) {
+        sessionStorage.removeItem('redirect');
+        history.replaceState(null, '', redirect);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
