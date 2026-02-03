@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Pin } from 'lucide-react';

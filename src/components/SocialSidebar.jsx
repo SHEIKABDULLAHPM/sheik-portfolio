@@ -1,9 +1,12 @@
-import linkedinIcon from '../assets/logo/linkedin.png';
-import gmailIcon from '../assets/logo/gmail.png';
-import whatsappIcon from '../assets/logo/whatsapp.png';
-import instagramIcon from '../assets/logo/insta.png';
-import facebookIcon from '../assets/logo/facebook.png';
-import { getSocialLinks } from '../data/contact.js';
+'use client';
+
+import linkedinIcon from '@/assets/logo/linkedin.png';
+import gmailIcon from '@/assets/logo/gmail.png';
+import whatsappIcon from '@/assets/logo/whatsapp.png';
+import instagramIcon from '@/assets/logo/insta.png';
+import facebookIcon from '@/assets/logo/facebook.png';
+import { getSocialLinks } from '@/data/contact.js';
+import { withBasePath } from '@/lib/withBasePath.js';
 
 const iconMap = {
 	linkedin: linkedinIcon,
@@ -40,7 +43,7 @@ const SocialSidebar = () => (
           className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/40 bg-gradient-to-b from-white to-slate-100 shadow-lg shadow-slate-900/40 transition hover:border-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
           aria-label={link.ariaLabel}
         >
-          <img src={link.icon} alt={`${link.label} logo`} className="h-5 w-5 object-contain" loading="lazy" />
+          <img src={withBasePath(link.icon)} alt={`${link.label} logo`} className="h-5 w-5 object-contain" loading="lazy" />
           <span className="sr-only">{link.label}</span>
         </a>
       ))}

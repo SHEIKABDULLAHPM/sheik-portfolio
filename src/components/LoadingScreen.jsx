@@ -1,7 +1,9 @@
+"use client";
+
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import useLoadingProgress from '../hooks/useLoadingProgress.js';
 
-const DISPLAY_NAME = 'Sheik Portfolio';
+const DISPLAY_NAME = "Sheik's Portfolio";
 
 const usePrefersReducedMotion = () => {
   const [prefers, setPrefers] = useState(false);
@@ -29,7 +31,7 @@ const usePrefersReducedMotion = () => {
 
 const LoadingScreen = ({
   isVisible = true,
-  duration = 3200,
+  duration = 5200,
   autoClose = true,
   allowEscape = true,
   onClose,
@@ -280,7 +282,7 @@ const LoadingScreen = ({
             style={{ fontFamily: "'Space Grotesk', 'Inter', system-ui, sans-serif" }}
           >
             <div
-              className="loader-focus-target flex flex-col items-center"
+              className="loader-focus-target flex flex-col items-center focus:outline-none focus-visible:outline-none"
               tabIndex={0}
               data-loader-focusable="true"
               aria-label={`Loading ${DISPLAY_NAME} portfolio, ${progressValue} percent complete`}

@@ -4,6 +4,9 @@ import { useCallback, useState } from 'react';
 import { RefreshCcw, ThumbsDown, ThumbsUp } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { blogPosts } from '@/data/blog.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/blog') ?? {};
 
 const REACTION_STORAGE_PREFIX = 'portfolio:blog:reaction:';
 

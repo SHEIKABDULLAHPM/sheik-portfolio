@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/andila-sathony-signature');
 
 @tailwind base;
 @tailwind components;
@@ -15,7 +16,7 @@
 	--accent: #8c8cff;
 	--accent-strong: #6366f1;
 	--accent-soft: rgba(99, 102, 241, 0.12);
-	--layout-max-width: min(1160px, 94vw);
+	--layout-max-width: 1200px;
 	--page-padding: clamp(1.25rem, 4vw, 3rem);
 	--radius-xl: 28px;
 	--radius-lg: 22px;
@@ -200,6 +201,28 @@
 	animation: caret-blink 1s steps(1) infinite;
 }
 
+.signature-mark {
+	font-family: 'Andila Sathony Signature', 'Great Vibes', 'Dancing Script', cursive;
+	font-size: clamp(1.8rem, 3vw, 2.8rem);
+	letter-spacing: 0.04em;
+	color: #f8fafc;
+	text-shadow:
+		0 8px 26px rgba(15, 23, 42, 0.65),
+		0 0 35px rgba(99, 102, 241, 0.35);
+	margin-top: 0.4rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.signature-mark::after {
+	content: '';
+	flex: 1 1 80px;
+	height: 1px;
+	background: linear-gradient(90deg, rgba(148, 163, 184, 0.4), transparent);
+	max-width: 120px;
+}
+
 .bg-aurora-gradient {
 	background:
 		conic-gradient(from 120deg at 30% 40%, rgba(99, 102, 241, 0.65), rgba(14, 165, 233, 0.35), rgba(236, 72, 153, 0.45), rgba(99, 102, 241, 0.4));
@@ -306,19 +329,16 @@
 
 @layer components {
 	.content-shell {
-		background:
-			radial-gradient(circle at 30% 20%, rgba(14, 165, 233, 0.18), transparent 55%),
-			radial-gradient(circle at 75% 80%, rgba(99, 102, 241, 0.16), transparent 60%),
-			rgba(2, 4, 12, 0.98);
-		border: 1px solid rgba(148, 163, 184, 0.08);
-		border-radius: var(--radius-xl);
-		box-shadow:
-			0 18px 60px rgba(2, 6, 23, 0.55),
-			0 0 80px rgba(99, 102, 241, 0.12);
+		width: 100%;
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.layout-shell {
-		width: min(var(--layout-max-width), 100%);
+		width: 100%;
+		max-width: var(--layout-max-width);
 		margin-left: auto;
 		margin-right: auto;
 		padding-left: var(--page-padding);
@@ -327,6 +347,7 @@
 
 	.page-shell {
 		width: 100%;
+		max-width: var(--layout-max-width);
 		margin-left: auto;
 		margin-right: auto;
 		display: flex;

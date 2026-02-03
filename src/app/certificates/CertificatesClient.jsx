@@ -4,7 +4,10 @@ import { useMemo, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { certificates } from '@/data/certificates.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
 import { withBasePath } from '@/lib/withBasePath.js';
+
+export const metadata = getRouteMetadata('/certificates') ?? {};
 
 const FILTER_OPTIONS = ['All', 'Courses', 'Other'];
 

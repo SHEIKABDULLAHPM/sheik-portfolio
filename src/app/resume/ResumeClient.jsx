@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Download, Eye, Info } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { resumeDetails } from '@/data/resume.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/resume') ?? {};
 
 const RESUME_URL = '/resume.pdf';
 

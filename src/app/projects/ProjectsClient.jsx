@@ -4,7 +4,10 @@ import { useMemo, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { projects } from '@/data/projects.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
 import { withBasePath } from '@/lib/withBasePath.js';
+
+export const metadata = getRouteMetadata('/projects') ?? {};
 
 const ProjectsPage = () => {
 	const categoryFilters = useMemo(

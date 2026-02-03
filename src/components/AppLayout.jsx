@@ -1,15 +1,46 @@
-import { Outlet, useLocation } from 'react-router-dom';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 import BackgroundParticles from './BackgroundParticles.jsx';
 import ScrollManager from './ScrollManager.jsx';
 import SocialSidebar from './SocialSidebar.jsx';
-import RouteMetadataHandler from './RouteMetadataHandler.jsx';
+import LoadingScreen from './LoadingScreen.jsx';
+import RouteTransitionOverlay from './RouteTransitionOverlay.jsx';
 
-const AppLayout = () => {
-  const location = useLocation();
+const AppLayout = ({ children }) => {
+  const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
+  const [showIntroLoader, setShowIntroLoader] = useState(true);
+  const [allowLoaderFinish, setAllowLoaderFinish] = useState(false);
+  const introTimerRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      setShowIntroLoader(false);
+      return undefined;
+    }
+
+    const handleReady = () => setAllowLoaderFinish(true);
+
+    if (document.readyState === 'complete') {
+      handleReady();
+      return undefined;
+    }
+
+    window.addEventListener('load', handleReady);
+    introTimerRef.current = window.setTimeout(handleReady, 3600);
+
+    return () => {
+      window.removeEventListener('load', handleReady);
+      if (introTimerRef.current) {
+        window.clearTimeout(introTimerRef.current);
+      }
+    };
+  }, []);
 
   const initialState = prefersReducedMotion ? false : { opacity: 0, y: 32 };
   const animateState = prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 };
@@ -20,9 +51,14 @@ const AppLayout = () => {
 
   return (
     <div className="relative min-h-screen bg-[#010511] text-slate-100 antialiased">
-      <RouteMetadataHandler />
+      <LoadingScreen
+        isVisible={showIntroLoader}
+        readyToComplete={allowLoaderFinish}
+        onClose={() => setShowIntroLoader(false)}
+      />
       <ScrollManager />
       <BackgroundParticles />
+      <RouteTransitionOverlay />
       <SocialSidebar />
       <div className="relative flex min-h-screen flex-col">
         <a href="#main-content" className="skip-link">
@@ -33,14 +69,14 @@ const AppLayout = () => {
           <div className="content-shell layout-shell page-content">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={location.pathname}
+                key={pathname}
                 initial={initialState}
                 animate={animateState}
                 exit={exitState}
                 transition={animateTransition}
                 className="min-h-[55vh]"
               >
-                <Outlet />
+                {children}
               </motion.div>
             </AnimatePresence>
           </div>

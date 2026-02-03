@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 const ScrollManager = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
@@ -17,7 +19,7 @@ const ScrollManager = () => {
     }
 
     return undefined;
-  }, [location.pathname, location.search]);
+  }, [pathname]);
 
   return null;
 };

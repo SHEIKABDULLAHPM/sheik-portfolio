@@ -1,5 +1,8 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navigationLinks = [
@@ -18,6 +21,7 @@ const MOBILE_MENU_ID = 'mobile-nav-panel';
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,15 +75,28 @@ const Navbar = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open]);
 
-  const linkClass = useMemo(
+  const getIsActive = useMemo(
+    () => (targetPath) => {
+      if (!pathname) {
+        return false;
+      }
+      if (targetPath === '/') {
+        return pathname === '/';
+      }
+      return pathname.startsWith(targetPath);
+    },
+    [pathname],
+  );
+
+  const getLinkClasses = useMemo(
     () =>
-      ({ isActive }) =>
+      (targetPath) =>
         `rounded-full px-3.5 py-1.5 text-[0.85rem] font-semibold transition-colors ${
-          isActive
+          getIsActive(targetPath)
             ? 'bg-white/15 text-white'
             : 'text-slate-300 hover:text-white hover:bg-white/5'
         }`,
-    [],
+    [getIsActive],
   );
 
   return (
@@ -91,21 +108,21 @@ const Navbar = () => {
       }`}
     >
       <nav aria-label="Primary" className="content-shell layout-shell flex flex-wrap items-center justify-between gap-3 py-3 sm:gap-4 sm:py-4">
-        <Link to="/" className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+        <Link href="/" className="text-xl font-semibold tracking-tight text-white sm:text-2xl" onClick={() => setOpen(false)}>
           Sheik<span className="text-indigo-300"> .</span>
         </Link>
         <div className="hidden items-center gap-1.5 lg:flex xl:gap-2">
           {navigationLinks.map((link) => (
-            <NavLink key={link.path} to={link.path} className={linkClass} onClick={() => setOpen(false)}>
+            <Link key={link.path} href={link.path} className={getLinkClasses(link.path)} onClick={() => setOpen(false)}>
               {link.label}
-            </NavLink>
+            </Link>
           ))}
         </div>
         <div className="hidden items-center gap-2 lg:flex">
-          <NavLink to="/resume" className="btn-secondary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]">
+          <Link href="/resume" className="btn-secondary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]" onClick={() => setOpen(false)}>
             Resume
-          </NavLink>
-          <Link to="/contact" className="btn-primary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]">
+          </Link>
+          <Link href="/contact" className="btn-primary px-4 py-2 text-[0.7rem] uppercase tracking-[0.28em]" onClick={() => setOpen(false)}>
             Let&apos;s talk
           </Link>
         </div>
@@ -127,29 +144,27 @@ const Navbar = () => {
             <div className="mx-auto w-full max-w-xl" id={MOBILE_MENU_ID}>
               <div className="mt-0 flex max-h-[70vh] flex-col gap-2 overflow-y-auto rounded-[28px] border border-white/12 bg-gradient-to-b from-[#080f2d]/95 via-[#050b20]/95 to-[#02060f]/98 p-4 shadow-[0_25px_80px_rgba(2,6,23,0.65)] backdrop-blur-2xl">
                 {navigationLinks.map((link) => (
-                  <NavLink
+                  <Link
                     key={link.path}
-                    to={link.path}
-                    className={({ isActive }) =>
-                      `rounded-2xl px-4 py-3 text-sm font-semibold tracking-wide ${
-                        isActive ? 'bg-white/15 text-white' : 'text-slate-200 hover:bg-white/10'
-                      }`
-                    }
+                    href={link.path}
+                    className={`rounded-2xl px-4 py-3 text-sm font-semibold tracking-wide ${
+                      getIsActive(link.path) ? 'bg-white/15 text-white' : 'text-slate-200 hover:bg-white/10'
+                    }`}
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
-                  </NavLink>
+                  </Link>
                 ))}
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                  <NavLink
-                    to="/resume"
+                  <Link
+                    href="/resume"
                     className="rounded-2xl border border-white/15 px-4 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-white leading-tight whitespace-normal"
                     onClick={() => setOpen(false)}
                   >
                     Resume
-                  </NavLink>
+                  </Link>
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="rounded-2xl bg-indigo-500 px-4 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-white leading-tight whitespace-normal"
                     onClick={() => setOpen(false)}
                   >

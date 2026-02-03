@@ -1,6 +1,9 @@
 import { Code2, Facebook, Github, Globe2, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Twitter } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { contactInfo } from '@/data/contact.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/contact') ?? {};
 
 const iconMap = {
   github: Github,

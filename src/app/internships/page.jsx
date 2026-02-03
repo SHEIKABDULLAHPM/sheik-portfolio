@@ -1,6 +1,9 @@
 import { Briefcase } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { internships } from '@/data/internships.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/internships') ?? {};
 
 const InternshipPage = () => (
   <div className="page-shell">

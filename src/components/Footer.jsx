@@ -1,3 +1,5 @@
+'use client';
+
 const Footer = () => (
   <footer className="border-t border-white/5 bg-slate-950/95">
     <div className="content-shell layout-shell flex flex-col gap-2 py-6 text-center text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:text-left">

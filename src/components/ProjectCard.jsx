@@ -1,4 +1,7 @@
+'use client';
+
 import { motion } from 'framer-motion';
+import { withBasePath } from '@/lib/withBasePath.js';
 
 const ProjectCard = ({ title, description, tech, image = undefined }) => (
   <motion.article
@@ -13,7 +16,7 @@ const ProjectCard = ({ title, description, tech, image = undefined }) => (
     <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-indigo-500/40 via-purple-500/30 to-slate-900">
       {image ? (
         <img
-          src={image}
+          src={withBasePath(image)}
           alt={title}
           draggable={false}
           className="h-full w-full object-cover will-change-transform transition-transform duration-700 group-hover:scale-[1.08] group-hover:brightness-110"

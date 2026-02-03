@@ -1,5 +1,8 @@
 import PageHeader from '@/components/PageHeader.jsx';
 import { aboutMe } from '@/data/hero.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/about') ?? {};
 
 const AboutPage = () => (
   <div className="page-shell">

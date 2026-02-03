@@ -1,6 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { withBasePath } from '@/lib/withBasePath.js';
 import heroPortrait from '../assets/sheik-abdullah.jpg';
-import resumePdf from '../assets/sheik-resume.pdf';
+
+const RESUME_PATH = '/resume.pdf';
 const heroVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
@@ -51,6 +53,9 @@ const Hero = () => {
         <h1 className="font-bold leading-tight text-white text-[clamp(1.8rem,4.4vw,3.05rem)]">
           Peer Sheik Abdullah Mohd Noordeen
         </h1>
+        <div className="signature-mark" aria-hidden="true">
+          Sheik Abdullah
+        </div>
         <p className="font-medium text-indigo-200 leading-snug text-[clamp(0.9rem,2vw,1.15rem)]">
           3rd Year CSBS Engineering Student
         </p>
@@ -59,7 +64,7 @@ const Hero = () => {
         </p>
         <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
           <a
-            href={resumePdf}
+            href={withBasePath(RESUME_PATH)}
             className="group relative inline-flex transform-gpu items-center justify-center overflow-hidden rounded-full bg-indigo-500 px-10 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all duration-500 will-change-transform hover:-translate-y-1 hover:bg-indigo-400 sm:px-9 sm:py-3.5 sm:text-sm lg:text-base"
             style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
           >
@@ -141,7 +146,7 @@ const Hero = () => {
         </div>
         <div className="relative flex h-72 w-72 items-center justify-center overflow-hidden rounded-full border border-indigo-500/40 bg-slate-900/70 shadow-xl shadow-indigo-500/20 sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]">
           <img
-            src={heroPortrait}
+            src={withBasePath(heroPortrait)}
             alt="Portrait of Sheik Abdullah"
             draggable={false}
             className="h-full w-full object-cover"

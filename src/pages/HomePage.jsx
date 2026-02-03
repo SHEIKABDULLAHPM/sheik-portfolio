@@ -1,16 +1,18 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { Cpu, Mail, MapPin } from 'lucide-react';
-import githubIcon from '../assets/logo/github.png';
-import hackerrankIcon from '../assets/logo/hackerrank.png';
-import instagramIcon from '../assets/logo/insta.png';
-import leetcodeIcon from '../assets/logo/leetcode.png';
-import linkedinIcon from '../assets/logo/linkedin.png';
-import gmailIcon from '../assets/logo/gmail.png';
-import whatsappIcon from '../assets/logo/whatsapp.png';
-import facebookIcon from '../assets/logo/facebook.png';
-import { profile } from '../data/hero.js';
-import { contactInfo, getSocialLinks } from '../data/contact.js';
+import githubIcon from '@/assets/logo/github.png';
+import hackerrankIcon from '@/assets/logo/hackerrank.png';
+import instagramIcon from '@/assets/logo/insta.png';
+import leetcodeIcon from '@/assets/logo/leetcode.png';
+import linkedinIcon from '@/assets/logo/linkedin.png';
+import gmailIcon from '@/assets/logo/gmail.png';
+import whatsappIcon from '@/assets/logo/whatsapp.png';
+import facebookIcon from '@/assets/logo/facebook.png';
+import { profile } from '@/data/hero.js';
+import { contactInfo, getSocialLinks } from '@/data/contact.js';
 const roles = ['Java Backend Developer', 'Spring Boot & Microservices', 'DSA Problem Solver', 'ML & AI Enthusiast'];
 
 const heroSkills = ['Java', 'Spring Boot', 'Microservices', 'DSA', 'ML & AI'];

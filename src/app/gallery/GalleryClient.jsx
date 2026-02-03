@@ -1,10 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { gallery } from '@/data/gallery.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
 import { withBasePath } from '@/lib/withBasePath.js';
+
+export const metadata = getRouteMetadata('/gallery') ?? {};
 
 const getItemsPerPage = () => {
   if (typeof window === 'undefined') {
@@ -137,7 +140,6 @@ const GalleryPage = () => {
         const maxStart = Math.max(0, totalItems - itemsPerPage);
         const startIndex = Math.min(startIndexMap[section.category] ?? 0, maxStart);
         const visibleItems = section.items.slice(startIndex, startIndex + itemsPerPage);
-        const canGoPrev = startIndex > 0;
         const canGoNext = startIndex < maxStart;
         return (
           <section key={section.category} className="surface space-y-5 sm:space-y-6">
@@ -149,15 +151,6 @@ const GalleryPage = () => {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label={`Show previous ${section.category} images`}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-white shadow-xl shadow-black/30 transition hover:border-white/40 hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/15 disabled:hover:bg-slate-950/80"
-                  onClick={() => handleNavigation(section.category, 'prev', totalItems)}
-                  disabled={!canGoPrev}
-                >
-                  <ChevronLeft size={18} />
-                </button>
                 <button
                   type="button"
                   aria-label={`Show next ${section.category} images`}

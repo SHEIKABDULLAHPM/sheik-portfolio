@@ -5,6 +5,9 @@ import { Brain, CircuitBoard, Code2, Coffee, Database, Globe, Users, Wrench } fr
 import PageHeader from '@/components/PageHeader.jsx';
 import SkillCard from '@/components/SkillCard.jsx';
 import { skillDecks } from '@/data/skills.js';
+import { getRouteMetadata } from '@/lib/getRouteMetadata.js';
+
+export const metadata = getRouteMetadata('/skills') ?? {};
 
 const PINNED_STORAGE_KEY = 'portfolio:pinned-skills';
 
