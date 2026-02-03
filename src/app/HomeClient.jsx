@@ -167,7 +167,7 @@ const Home = () => {
                 Introduction
               </span>
               <h1 className="text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold leading-tight text-white md:leading-[1.05]">
-                I'm Sheik Abdullah
+                I&rsquo;m Sheik Abdullah
               </h1>
               <p className="text-sm font-medium text-slate-100 sm:text-[0.95rem]">
                 {displayedRole}
@@ -257,7 +257,7 @@ const Home = () => {
           </div>
           <div className="rounded-3xl border border-white/5 bg-slate-900/70 p-4 shadow-xl shadow-indigo-500/10 sm:p-5">
             <div className="flex flex-col gap-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-sm">See what I'm doing</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-indigo-200 sm:text-sm">See what I&rsquo;m doing</p>
               <p className="text-xs text-slate-400">{workspaceLinksLabel}</p>
             </div>
             <div className="mt-3 flex flex-wrap gap-3">

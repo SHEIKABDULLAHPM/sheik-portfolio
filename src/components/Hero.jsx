@@ -60,7 +60,7 @@ const Hero = () => {
           3rd Year CSBS Engineering Student
         </p>
         <p className="leading-relaxed text-slate-300 text-[clamp(0.9rem,1.6vw,1.05rem)]">
-          I craft modern web experiences that blend clean design with purposeful problem-solving. I'm quick to embrace new tools, building responsive, accessible, and genuinely people-friendly interfaces with thoughtful engineering and an ever-curious mindset.
+          I craft modern web experiences that blend clean design with purposeful problem-solving. I&rsquo;m quick to embrace new tools, building responsive, accessible, and genuinely people-friendly interfaces with thoughtful engineering and an ever-curious mindset.
         </p>
         <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
           <a
