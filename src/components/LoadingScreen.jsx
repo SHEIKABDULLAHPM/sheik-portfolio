@@ -203,7 +203,6 @@ const LoadingScreen = ({
       } ${overlayClassName}`}
       role="status"
       aria-live="polite"
-      aria-modal="true"
       aria-label={`Loading ${DISPLAY_NAME} portfolio - ${progressValue}% complete`}
       style={{
         background: 'linear-gradient(135deg, #0a0f1e 0%, #050812 50%, #0d1424 100%)',
