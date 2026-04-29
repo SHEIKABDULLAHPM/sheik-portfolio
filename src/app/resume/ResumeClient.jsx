@@ -24,7 +24,7 @@ const ResumePage = () => {
       <div className="flex flex-wrap gap-3">
         <a
           href={RESUME_URL}
-          download="Sheik_Abdullah_Resume.pdf"
+          download="resume.pdf"
           className="inline-flex items-center gap-2 rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:bg-indigo-400"
         >
           <Download size={16} /> Download Resume
