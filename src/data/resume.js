@@ -10,12 +10,12 @@ export const resumeDetails = {
 		languages: ['English', 'Tamil', 'Hindi'],
 	},
 	education: [
-		{
-			school: 'Bannari Amman Institute of Technology, Sathyamangalam',
-			program: 'B.Tech in Computer Science and Business Systems',
-			period: '2023 – 2027',
-			score: 'Current CGPA: 7.65',
-		},
+			{
+				school: 'Bannari Amman Institute of Technology, Sathyamangalam',
+				program: 'B.Tech in Computer Science and Business Systems',
+				period: '2023 – 2027',
+				score: 'Current CGPA: 7.76',
+			},
 		{
 			school: 'Arumugam Academy Matric Hr. Sec. School, Aravakuruchi',
 			program: 'Higher Secondary Education · CS-Maths Stream',
