@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { withBasePath } from '@/lib/withBasePath.js';
 import heroPortrait from '../assets/sheik-abdullah.jpg';
 
-const RESUME_PATH = '/resume.pdf';
+const RESUME_PATH = 'https://drive.google.com/file/d/1pB3TIl2wJ0V4alMH1VqlPyShpWEdgU5P/view';
 const heroVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },

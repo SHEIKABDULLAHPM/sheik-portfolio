@@ -28,14 +28,7 @@ const socialDirectory = [
 		ariaLabel: 'Visit Instagram profile',
 		category: 'social',
 	},
-	{
-		id: 'facebook',
-		platform: 'Facebook',
-		type: 'facebook',
-		url: 'https://www.facebook.com/profile.php?id=100067640333725',
-		ariaLabel: 'Open Facebook profile',
-		category: 'social',
-	},
+
 	{
 		id: 'email',
 		platform: 'Email',
@@ -56,7 +49,7 @@ const socialDirectory = [
 		id: 'leetcode',
 		platform: 'LeetCode',
 		type: 'leetcode',
-		url: 'https://leetcode.com/u/T5dGt4g82v/',
+		url: 'https://leetcode.com/u/SHEIKABDULLAHPM/',
 		ariaLabel: 'Solve with me on LeetCode',
 		category: 'workspace',
 	},
@@ -64,7 +57,7 @@ const socialDirectory = [
 		id: 'hackerrank',
 		platform: 'HackerRank',
 		type: 'hackerrank',
-		url: 'https://www.hackerrank.com/profile/Peer_Master',
+		url: 'https://www.hackerrank.com/profile/sheikabdullahpe1',
 		ariaLabel: 'View HackerRank profile',
 		category: 'workspace',
 	},
