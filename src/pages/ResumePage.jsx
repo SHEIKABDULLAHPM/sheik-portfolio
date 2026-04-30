@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { Download, Eye, Info } from 'lucide-react';
 import PageHeader from '@/components/PageHeader.jsx';
 import { resumeDetails } from '@/data/resume.js';
+import { withBasePath } from '@/lib/withBasePath.js';
 
-const RESUME_URL = '/resume.pdf';
+const RESUME_URL = withBasePath('/resume.pdf');
 
 const ResumePage = () => {
   const [showPreview, setShowPreview] = useState(false);
@@ -21,7 +22,7 @@ const ResumePage = () => {
       <div className="flex flex-wrap gap-3">
         <a
           href={RESUME_URL}
-          download="Sheik_Abdullah_Resume.pdf"
+          download="resume.pdf"
           className="inline-flex items-center gap-2 rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:bg-indigo-400"
         >
           <Download size={16} /> Download Resume
@@ -37,16 +38,16 @@ const ResumePage = () => {
 
       <section className="surface space-y-4">
         {showPreview ? (
-        <div className="surface p-4">
-          <div className="aspect-[8.5/11] w-full overflow-hidden rounded-2xl border border-slate-800">
-            <iframe 
-              title="Resume preview" 
-              src={RESUME_URL} 
-              className="h-full w-full" 
-              type="application/pdf"
-            />
+          <div className="surface p-4">
+            <div className="aspect-[8.5/11] w-full overflow-hidden rounded-2xl border border-slate-800">
+              <iframe
+                title="Resume preview"
+                src={RESUME_URL}
+                className="h-full w-full"
+                type="application/pdf"
+              />
+            </div>
           </div>
-        </div>
       ) : null}
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200">
           <Info size={16} /> Summary
