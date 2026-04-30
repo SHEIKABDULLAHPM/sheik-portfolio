@@ -19,7 +19,7 @@ export const aboutMe = {
 			institution: 'Bannari Amman Institute of Technology, Sathyamangalam',
 			qualification: 'B.Tech in Computer Science and Business Systems',
 			duration: '2023 – 2027',
-			grade: 'Current CGPA: 7.65',
+			grade: 'Current CGPA: 7.76',
 		},
 		{
 			id: 'edu-arumugam',
